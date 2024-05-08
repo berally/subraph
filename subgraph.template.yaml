@@ -1,0 +1,38 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BerallyPasses
+    network: {{ network }}
+    source:
+      address: "{{ address }}"
+      abi: BerallyPasses
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - ManagerFeePercentageChanged
+        - OwnershipTransferred
+        - ProtocolFeePercentageChanged
+        - Trade
+      abis:
+        - name: BerallyPasses
+          file: ./abis/BerallyPasses.json
+      eventHandlers:
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: ManagerFeePercentageChanged(uint256)
+          handler: handleManagerFeePercentageChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProtocolFeePercentageChanged(uint256)
+          handler: handleProtocolFeePercentageChanged
+        - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleTrade
+      file: ./src/berally-passes.ts
