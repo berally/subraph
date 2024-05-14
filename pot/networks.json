@@ -1,8 +1,0 @@
-{
-  "sepolia": {
-    "PotFactory": {
-      "address": "0xcA3CB1E8D215eeE7BF16A70813389BA62Ff4EB46",
-      "startBlock": 5898889
-    }
-  }
-}

@@ -205,3 +205,140 @@ type VolumeFeeChanged @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AssetAdded @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  asset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AssetRemoved @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  asset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Claimed @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  investor: Bytes! # address
+  shareAmount: BigInt! # uint256
+  usdToken: Bytes! # address
+  usdAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Closed @entity(immutable: true) {
+  id: Bytes!
+
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Deposited @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  investor: Bytes! # address
+  usdToken: Bytes! # address
+  usdAmount: BigInt! # uint256
+  shares: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Executed @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  fromAsset: Bytes! # address
+  fromAmount: BigInt! # uint256
+  toAsset: Bytes! # address
+  toAmount: BigInt! # uint256
+  volumeFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FundraisingClosed @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  totalSupply: BigInt! # uint256
+  totalRaisedInUsd: BigInt! # uint256
+  fundraisingDeadline: BigInt! # uint256
+  lockingDeadline: BigInt! # uint256
+  investmentDeadline: BigInt! # uint256
+  managerSharePercent: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PotInitialized @entity(immutable: true) {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ManagerWithdrawn @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  shareAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Withdrawn @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  sharePrice: BigInt! # uint256
+  profitPercentage: BigInt! # uint256
+  investor: Bytes! # address
+  shareAmount: BigInt! # uint256
+  portion: BigInt! # uint256
+  withdrawnAssets: [Bytes!]! # tuple[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawnAsset @entity(immutable: true) {
+  id: Bytes!
+  withdrawn: Bytes!
+  asset: Bytes! # address
+  amount: BigInt! # uint256
+  protocolExitFee: BigInt! # uint256
+  managerExitFee: BigInt! # uint256
+  performanceFee: BigInt! # uint256
+}

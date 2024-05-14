@@ -1,3 +1,4 @@
+import { Pot } from '../generated/templates'
 import {
   AdminChanged as AdminChangedEvent,
   BeraFeeChanged as BeraFeeChangedEvent,
@@ -291,6 +292,8 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  Pot.create(event.params.pot)
 }
 
 export function handlePotImplementationChanged(

@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: PotFactory
-    network: sepolia
+    network: {{ network }}
     source:
-      address: "0xcA3CB1E8D215eeE7BF16A70813389BA62Ff4EB46"
+      address: "{{ address }}"
       abi: PotFactory
-      startBlock: 5898889
+      startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -74,7 +74,8 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Paused(address)
           handler: handlePaused
-        - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,uint256,indexed address,uint256,uint256,uint8)
+        - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,uint256,indexed
+            address,uint256,uint256,uint8)
           handler: handlePotCreated
         - event: PotImplementationChanged(indexed address)
           handler: handlePotImplementationChanged
@@ -93,3 +94,56 @@ dataSources:
         - event: VolumeFeeChanged(uint256,uint256)
           handler: handleVolumeFeeChanged
       file: ./src/pot-factory.ts
+templates:
+  - kind: ethereum
+    name: Pot
+    network: {{network}}
+    source:
+      abi: Pot
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - AssetAdded
+        - AssetRemoved
+        - Claimed
+        - Closed
+        - Deposited
+        - Executed
+        - FundraisingClosed
+        - PotInitialized
+        - ManagerWithdrawn
+        - Transfer
+        - Withdrawn
+      abis:
+        - name: Pot
+          file: ./abis/Pot.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: AssetAdded(indexed address,address)
+          handler: handleAssetAdded
+        - event: AssetRemoved(address,address)
+          handler: handleAssetRemoved
+        - event: Claimed(indexed address,indexed address,uint256,address,uint256)
+          handler: handleClaimed
+        - event: Closed()
+          handler: handleClosed
+        - event: Deposited(indexed address,indexed address,address,uint256,uint256)
+          handler: handleDeposited
+        - event: Executed(indexed address,indexed address,uint256,indexed address,uint256,uint256)
+          handler: handleExecuted
+        - event: FundraisingClosed(indexed address,uint256,uint256,uint256,uint256,uint256,uint8)
+          handler: handleFundraisingClosed
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: ManagerWithdrawn(indexed address,uint256)
+          handler: handleManagerWithdrawn
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Withdrawn(indexed address,uint256,uint256,indexed
+            address,uint256,uint256,(address,uint256,uint256,uint256,uint256)[])
+          handler: handleWithdrawn
+      file: ./src/pot.ts
