@@ -1,0 +1,207 @@
+type AdminChanged @entity(immutable: true) {
+  id: Bytes!
+  admin: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeraFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  beraFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerallyPassesAddressChanged @entity(immutable: true) {
+  id: Bytes!
+  berallyPasses: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BexSet @entity(immutable: true) {
+  id: Bytes!
+  bex: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FundraisingPeriodLimitsChanged @entity(immutable: true) {
+  id: Bytes!
+  min: BigInt! # uint256
+  max: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Initialized @entity(immutable: true) {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type InvestmentPeriodLimitsChanged @entity(immutable: true) {
+  id: Bytes!
+  min: BigInt! # uint256
+  max: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LockingPeriodLimitsChanged @entity(immutable: true) {
+  id: Bytes!
+  min: BigInt! # uint256
+  max: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ManagerExitFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  numerator: BigInt! # uint256
+  denominator: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MaxCapacityPerPotChanged @entity(immutable: true) {
+  id: Bytes!
+  capacity: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MaxPerformanceFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  maxManagerFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MaximumSupportedAssetCountChanged @entity(immutable: true) {
+  id: Bytes!
+  count: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MinInvestmentAmountChanged @entity(immutable: true) {
+  id: Bytes!
+  maxAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Paused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PotCreated @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  usdToken: Bytes! # address
+  fundraisingDeadline: BigInt! # uint256
+  lockingDeadline: BigInt! # uint256
+  investmentDeadline: BigInt! # uint256
+  maxCapacity: BigInt! # uint256
+  manager: Bytes! # address
+  managerFeeNumerator: BigInt! # uint256
+  managerFeeDenominator: BigInt! # uint256
+  minManagerSharePercentage: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PotImplementationChanged @entity(immutable: true) {
+  id: Bytes!
+  df: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProtocolExitFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  numerator: BigInt! # uint256
+  denominator: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenAdded @entity(immutable: true) {
+  id: Bytes!
+  asset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenRemoved @entity(immutable: true) {
+  id: Bytes!
+  asset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TreasuryChanged @entity(immutable: true) {
+  id: Bytes!
+  treasury: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Unpaused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UsdTokenChanged @entity(immutable: true) {
+  id: Bytes!
+  usd: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VolumeFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  numerator: BigInt! # uint256
+  denominator: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

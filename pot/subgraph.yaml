@@ -1,0 +1,95 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PotFactory
+    network: sepolia
+    source:
+      address: "0xcA3CB1E8D215eeE7BF16A70813389BA62Ff4EB46"
+      abi: PotFactory
+      startBlock: 5898889
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeraFeeChanged
+        - BerallyPassesAddressChanged
+        - BexSet
+        - FundraisingPeriodLimitsChanged
+        - Initialized
+        - InvestmentPeriodLimitsChanged
+        - LockingPeriodLimitsChanged
+        - ManagerExitFeeChanged
+        - MaxCapacityPerPotChanged
+        - MaxPerformanceFeeChanged
+        - MaximumSupportedAssetCountChanged
+        - MinInvestmentAmountChanged
+        - OwnershipTransferred
+        - Paused
+        - PotCreated
+        - PotImplementationChanged
+        - ProtocolExitFeeChanged
+        - TokenAdded
+        - TokenRemoved
+        - TreasuryChanged
+        - Unpaused
+        - UsdTokenChanged
+        - VolumeFeeChanged
+      abis:
+        - name: PotFactory
+          file: ./abis/PotFactory.json
+      eventHandlers:
+        - event: AdminChanged(indexed address)
+          handler: handleAdminChanged
+        - event: BeraFeeChanged(uint256)
+          handler: handleBeraFeeChanged
+        - event: BerallyPassesAddressChanged(indexed address)
+          handler: handleBerallyPassesAddressChanged
+        - event: BexSet(address)
+          handler: handleBexSet
+        - event: FundraisingPeriodLimitsChanged(uint256,uint256)
+          handler: handleFundraisingPeriodLimitsChanged
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: InvestmentPeriodLimitsChanged(uint256,uint256)
+          handler: handleInvestmentPeriodLimitsChanged
+        - event: LockingPeriodLimitsChanged(uint256,uint256)
+          handler: handleLockingPeriodLimitsChanged
+        - event: ManagerExitFeeChanged(uint256,uint256)
+          handler: handleManagerExitFeeChanged
+        - event: MaxCapacityPerPotChanged(uint256)
+          handler: handleMaxCapacityPerPotChanged
+        - event: MaxPerformanceFeeChanged(uint256)
+          handler: handleMaxPerformanceFeeChanged
+        - event: MaximumSupportedAssetCountChanged(uint256)
+          handler: handleMaximumSupportedAssetCountChanged
+        - event: MinInvestmentAmountChanged(uint256)
+          handler: handleMinInvestmentAmountChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,uint256,indexed address,uint256,uint256,uint8)
+          handler: handlePotCreated
+        - event: PotImplementationChanged(indexed address)
+          handler: handlePotImplementationChanged
+        - event: ProtocolExitFeeChanged(uint256,uint256)
+          handler: handleProtocolExitFeeChanged
+        - event: TokenAdded(address)
+          handler: handleTokenAdded
+        - event: TokenRemoved(address)
+          handler: handleTokenRemoved
+        - event: TreasuryChanged(indexed address)
+          handler: handleTreasuryChanged
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: UsdTokenChanged(indexed address)
+          handler: handleUsdTokenChanged
+        - event: VolumeFeeChanged(uint256,uint256)
+          handler: handleVolumeFeeChanged
+      file: ./src/pot-factory.ts
