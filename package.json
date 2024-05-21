@@ -9,7 +9,7 @@
     "build": "graph build",
 
     "deploy:passes:sepolia": "graph deploy --node https://api.studio.thegraph.com/deploy/ berally/passes-sepolia",
-    "deploy:passes:berachain-testnet": "goldsky subgraph deploy berally-passes-testnet/1.0.0 --path ."
+    "deploy:passes:berachain-testnet": "goldsky subgraph deploy berally-passes-testnet/2.0.0 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",
