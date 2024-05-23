@@ -47,7 +47,7 @@ type Initialized @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type InvestmentPeriodLimitsChanged @entity(immutable: true) {
+type TradingPeriodLimitsChanged @entity(immutable: true) {
   id: Bytes!
   min: BigInt! # uint256
   max: BigInt! # uint256
@@ -285,7 +285,7 @@ type FundraisingClosed @entity(immutable: true) {
   totalRaisedInUsd: BigInt! # uint256
   fundraisingDeadline: BigInt! # uint256
   lockingDeadline: BigInt! # uint256
-  investmentDeadline: BigInt! # uint256
+  tradingDeadline: BigInt! # uint256
   managerSharePercent: Int! # uint8
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -326,8 +326,8 @@ type Withdrawn @entity(immutable: true) {
   profitPercentage: BigInt! # uint256
   investor: Bytes! # address
   shareAmount: BigInt! # uint256
+  toAsset: Bytes! # address
   portion: BigInt! # uint256
-  withdrawnAssets: [Bytes!]! # tuple[]
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -337,7 +337,8 @@ type WithdrawnAsset @entity(immutable: true) {
   id: Bytes!
   withdrawn: Bytes!
   asset: Bytes! # address
-  amount: BigInt! # uint256
+  amountOut: BigInt! # uint256
+  amountTo: BigInt! # uint256
   protocolExitFee: BigInt! # uint256
   managerExitFee: BigInt! # uint256
   performanceFee: BigInt! # uint256

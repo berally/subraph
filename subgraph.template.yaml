@@ -22,7 +22,7 @@ dataSources:
         - BexSet
         - FundraisingPeriodLimitsChanged
         - Initialized
-        - InvestmentPeriodLimitsChanged
+        - TradingPeriodLimitsChanged
         - LockingPeriodLimitsChanged
         - ManagerExitFeeChanged
         - MaxCapacityPerPotChanged
@@ -56,8 +56,8 @@ dataSources:
           handler: handleFundraisingPeriodLimitsChanged
         - event: Initialized(uint8)
           handler: handleInitialized
-        - event: InvestmentPeriodLimitsChanged(uint256,uint256)
-          handler: handleInvestmentPeriodLimitsChanged
+        - event: TradingPeriodLimitsChanged(uint256,uint256)
+          handler: handleTradingPeriodLimitsChanged
         - event: LockingPeriodLimitsChanged(uint256,uint256)
           handler: handleLockingPeriodLimitsChanged
         - event: ManagerExitFeeChanged(uint256,uint256)
@@ -144,6 +144,6 @@ templates:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
         - event: Withdrawn(indexed address,uint256,uint256,indexed
-            address,uint256,uint256,(address,uint256,uint256,uint256,uint256)[])
+            address,uint256,indexed address,uint256,(address,uint256,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
       file: ./src/pot.ts

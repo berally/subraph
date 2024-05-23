@@ -6,7 +6,7 @@ import {
   BexSet as BexSetEvent,
   FundraisingPeriodLimitsChanged as FundraisingPeriodLimitsChangedEvent,
   Initialized as InitializedEvent,
-  InvestmentPeriodLimitsChanged as InvestmentPeriodLimitsChangedEvent,
+  TradingPeriodLimitsChanged as TradingPeriodLimitsChangedEvent,
   LockingPeriodLimitsChanged as LockingPeriodLimitsChangedEvent,
   ManagerExitFeeChanged as ManagerExitFeeChangedEvent,
   MaxCapacityPerPotChanged as MaxCapacityPerPotChangedEvent,
@@ -32,7 +32,7 @@ import {
   BexSet,
   FundraisingPeriodLimitsChanged,
   Initialized,
-  InvestmentPeriodLimitsChanged,
+  TradingPeriodLimitsChanged,
   LockingPeriodLimitsChanged,
   ManagerExitFeeChanged,
   MaxCapacityPerPotChanged,
@@ -135,10 +135,10 @@ export function handleInitialized(event: InitializedEvent): void {
   entity.save()
 }
 
-export function handleInvestmentPeriodLimitsChanged(
-  event: InvestmentPeriodLimitsChangedEvent
+export function handleTradingPeriodLimitsChanged(
+  event: TradingPeriodLimitsChangedEvent
 ): void {
-  let entity = new InvestmentPeriodLimitsChanged(
+  let entity = new TradingPeriodLimitsChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.min = event.params.min
@@ -280,7 +280,7 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.usdToken = event.params.usdToken
   entity.fundraisingDeadline = event.params.fundraisingDeadline
   entity.lockingDeadline = event.params.lockingDeadline
-  entity.investmentDeadline = event.params.investmentDeadline
+  entity.investmentDeadline = event.params.tradingDeadline
   entity.maxCapacity = event.params.maxCapacity
   entity.manager = event.params.manager
   entity.managerFeeNumerator = event.params.managerFeeNumerator

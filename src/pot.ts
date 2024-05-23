@@ -144,7 +144,7 @@ export function handleFundraisingClosed(event: FundraisingClosedEvent): void {
   entity.totalRaisedInUsd = event.params.totalRaisedInUsd
   entity.fundraisingDeadline = event.params.fundraisingDeadline
   entity.lockingDeadline = event.params.lockingDeadline
-  entity.investmentDeadline = event.params.investmentDeadline
+  entity.tradingDeadline = event.params.tradingDeadline
   entity.managerSharePercent = event.params.managerSharePercent
 
   entity.blockNumber = event.block.number
@@ -205,6 +205,7 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   entity.profitPercentage = event.params.profitPercentage
   entity.investor = event.params.investor
   entity.shareAmount = event.params.shareAmount
+  entity.toAsset = event.params.toAsset
   entity.portion = event.params.portion
 
   entity.blockNumber = event.block.number
@@ -220,7 +221,8 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
     );
 
     withdrawnAsset.asset = withdrawnAssetEvent.asset;
-    withdrawnAsset.amount = withdrawnAssetEvent.amount;
+    withdrawnAsset.amountOut = withdrawnAssetEvent.amountOut;
+    withdrawnAsset.amountTo = withdrawnAssetEvent.amountTo;
     withdrawnAsset.protocolExitFee = withdrawnAssetEvent.protocolExitFee;
     withdrawnAsset.managerExitFee = withdrawnAssetEvent.managerExitFee;
     withdrawnAsset.performanceFee = withdrawnAssetEvent.performanceFee;
