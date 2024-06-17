@@ -1,5 +1,5 @@
 {
-    "network": "berachain-public-testnet",
+    "network": "berachain-bartio",
     "address": "",
     "startBlock": 0
 }
