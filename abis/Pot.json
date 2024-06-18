@@ -33,7 +33,7 @@
   },
   {
     "inputs": [],
-    "name": "CantWithdraw",
+    "name": "FailedTransaction",
     "type": "error"
   },
   {
@@ -53,6 +53,11 @@
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "InvalidTransaction",
+    "type": "error"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -66,17 +71,6 @@
       }
     ],
     "name": "NotEnoughFund",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "NotSupportedToken",
     "type": "error"
   },
   {
@@ -161,22 +155,22 @@
   },
   {
     "inputs": [],
-    "name": "UnableToClaimAfterSuccessfulFundraising",
+    "name": "UnableToClaimWhenLive",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "UnableToClaimWhileFundraising",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "UnableToWithdrawWhileInvesting",
+    "name": "UnableToWithdrawWhenNotLive",
     "type": "error"
   },
   {
     "inputs": [],
     "name": "UnableToWithdrawWhileLocking",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroAddress",
     "type": "error"
   },
   {
@@ -268,6 +262,31 @@
         "type": "address"
       },
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalSupply",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalRaisedInUsd",
+        "type": "uint256"
+      }
+    ],
+    "name": "Canceled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
         "indexed": true,
         "internalType": "address",
         "name": "investor",
@@ -293,12 +312,6 @@
       }
     ],
     "name": "Claimed",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "Closed",
     "type": "event"
   },
   {
@@ -348,34 +361,16 @@
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "fromAsset",
+        "name": "sender",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "fromAmount",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toAsset",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "toAmount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "volumeFee",
-        "type": "uint256"
+        "internalType": "uint16",
+        "name": "transactionType",
+        "type": "uint16"
       }
     ],
     "name": "Executed",
@@ -413,18 +408,6 @@
         "internalType": "uint256",
         "name": "lockingDeadline",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tradingDeadline",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "managerSharePercent",
-        "type": "uint8"
       }
     ],
     "name": "FundraisingClosed",
@@ -441,25 +424,6 @@
       }
     ],
     "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "pot",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "shareAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "ManagerWithdrawn",
     "type": "event"
   },
   {
@@ -680,6 +644,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "cancelFundraising",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address[]",
@@ -715,29 +686,6 @@
     "name": "closeFundraising",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "deadlines",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "fundraising",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "locking",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "trading",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -793,28 +741,24 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_amountToExecute",
-        "type": "uint256"
-      },
-      {
         "internalType": "address",
-        "name": "_fromAsset",
+        "name": "_to",
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_toAsset",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_minToAmount",
-        "type": "uint256"
+        "internalType": "bytes",
+        "name": "_data",
+        "type": "bytes"
       }
     ],
     "name": "execute",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -826,6 +770,19 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fundraisingDeadline",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -849,47 +806,6 @@
         "internalType": "uint256[]",
         "name": "values",
         "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getInfo",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getManagerSharePercent",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -940,19 +856,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTotalValueInUsd",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -994,26 +897,14 @@
         "type": "address"
       },
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "fundraising",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "locking",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "trading",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct IPotFactory.Deadlines",
-        "name": "_deadlines",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "_fundraisingDealine",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_lockingDealine",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -1031,11 +922,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint8",
-        "name": "_minManagerSharePercentage",
-        "type": "uint8"
-      },
-      {
         "internalType": "address[]",
         "name": "_supportedAssets",
         "type": "address[]"
@@ -1044,19 +930,6 @@
     "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isSuccessful",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1080,6 +953,19 @@
   },
   {
     "inputs": [],
+    "name": "lockingDeadline",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "manager",
     "outputs": [
       {
@@ -1093,64 +979,12 @@
   },
   {
     "inputs": [],
-    "name": "managerInvestedInUsd",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "managerShares",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "managerWithdrawn",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "maxCapacity",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "minManagerSharePercentage",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -1217,6 +1051,19 @@
   {
     "inputs": [],
     "name": "totalSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalValueInUsd",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1387,13 +1234,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawShare",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

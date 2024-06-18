@@ -30,10 +30,9 @@ type BexSet @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type FundraisingPeriodLimitsChanged @entity(immutable: true) {
+type DefaultFundraisingPeriodChanged @entity(immutable: true) {
   id: Bytes!
-  min: BigInt! # uint256
-  max: BigInt! # uint256
+  defaultFundraisingPeriod: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -47,19 +46,9 @@ type Initialized @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type TradingPeriodLimitsChanged @entity(immutable: true) {
+type DefaultLockingPeriodChanged @entity(immutable: true) {
   id: Bytes!
-  min: BigInt! # uint256
-  max: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type LockingPeriodLimitsChanged @entity(immutable: true) {
-  id: Bytes!
-  min: BigInt! # uint256
-  max: BigInt! # uint256
+  defaultLockingPeriod: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -129,12 +118,10 @@ type PotCreated @entity(immutable: true) {
   usdToken: Bytes! # address
   fundraisingDeadline: BigInt! # uint256
   lockingDeadline: BigInt! # uint256
-  investmentDeadline: BigInt! # uint256
   maxCapacity: BigInt! # uint256
   manager: Bytes! # address
-  managerFeeNumerator: BigInt! # uint256
-  managerFeeDenominator: BigInt! # uint256
-  minManagerSharePercentage: Int! # uint8
+  performanceFeeNumerator: BigInt! # uint256
+  performanceFeeDenominator: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -245,14 +232,6 @@ type Claimed @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Closed @entity(immutable: true) {
-  id: Bytes!
-
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type Deposited @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
@@ -265,14 +244,21 @@ type Deposited @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type Canceled @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  totalSupply: BigInt! # uint256
+  totalRaisedInUsd: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type Executed @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
-  fromAsset: Bytes! # address
-  fromAmount: BigInt! # uint256
-  toAsset: Bytes! # address
-  toAmount: BigInt! # uint256
-  volumeFee: BigInt! # uint256
+  sender: Bytes! # address
+  transactionType: Int!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -285,8 +271,6 @@ type FundraisingClosed @entity(immutable: true) {
   totalRaisedInUsd: BigInt! # uint256
   fundraisingDeadline: BigInt! # uint256
   lockingDeadline: BigInt! # uint256
-  tradingDeadline: BigInt! # uint256
-  managerSharePercent: Int! # uint8
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -295,15 +279,6 @@ type FundraisingClosed @entity(immutable: true) {
 type PotInitialized @entity(immutable: true) {
   id: Bytes!
   version: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ManagerWithdrawn @entity(immutable: true) {
-  id: Bytes!
-  pot: Bytes! # address
-  shareAmount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

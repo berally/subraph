@@ -139,6 +139,19 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "assetHandler",
+        "type": "address"
+      }
+    ],
+    "name": "AssetHandlerAddressChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "beraFee",
         "type": "uint256"
@@ -179,17 +192,37 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "max",
+        "name": "defaultFundraisingPeriod",
         "type": "uint256"
       }
     ],
-    "name": "FundraisingPeriodLimitsChanged",
+    "name": "DefaultFundraisingPeriodChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defaultLockingPeriod",
+        "type": "uint256"
+      }
+    ],
+    "name": "DefaultLockingPeriodChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "governanceAddress",
+        "type": "address"
+      }
+    ],
+    "name": "GovernanceAddressChanged",
     "type": "event"
   },
   {
@@ -203,25 +236,6 @@
       }
     ],
     "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "max",
-        "type": "uint256"
-      }
-    ],
-    "name": "LockingPeriodLimitsChanged",
     "type": "event"
   },
   {
@@ -357,12 +371,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "tradingDeadline",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "maxCapacity",
         "type": "uint256"
       },
@@ -375,20 +383,14 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "managerFeeNumerator",
+        "name": "performanceFeeNumerator",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "managerFeeDenominator",
+        "name": "performanceFeeDenominator",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "minManagerSharePercentage",
-        "type": "uint8"
       }
     ],
     "name": "PotCreated",
@@ -450,25 +452,6 @@
       }
     ],
     "name": "TokenRemoved",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "max",
-        "type": "uint256"
-      }
-    ],
-    "name": "TradingPeriodLimitsChanged",
     "type": "event"
   },
   {
@@ -571,6 +554,19 @@
   {
     "inputs": [],
     "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "assetHandler",
     "outputs": [
       {
         "internalType": "address",
@@ -699,36 +695,9 @@
         "type": "string"
       },
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "fundraisingPeriod",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lockingPeriod",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tradingPeriod",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "maxCapacity",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "performanceFee",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct PotFactory.PotInfo",
-        "name": "_fi",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "_performanceFee",
+        "type": "uint256"
       }
     ],
     "name": "createPot",
@@ -744,12 +713,25 @@
   },
   {
     "inputs": [],
-    "name": "defaultMinManagerSharePercentage",
+    "name": "defaultFundraisingPeriod",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint8"
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "defaultLockingPeriod",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -768,6 +750,25 @@
       {
         "internalType": "address",
         "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "name",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "destination",
         "type": "address"
       }
     ],
@@ -798,6 +799,25 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "externalAsset",
+        "type": "address"
+      }
+    ],
+    "name": "getAssetProtector",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "protector",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -888,6 +908,44 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      }
+    ],
+    "name": "getPriceInUsdOfPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "externalContract",
+        "type": "address"
+      }
+    ],
+    "name": "getProtector",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "protector",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getProtocolExitFee",
     "outputs": [
@@ -937,21 +995,24 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "governanceAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
         "name": "_potImplementation",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_maxCapacityPerPot",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_minInvestmentAmount",
-        "type": "uint256"
       },
       {
         "internalType": "address",
@@ -961,6 +1022,16 @@
       {
         "internalType": "address",
         "name": "_berallyPasses",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_governanceAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_assetHandlerAddress",
         "type": "address"
       },
       {
@@ -1064,32 +1135,6 @@
   },
   {
     "inputs": [],
-    "name": "maxFundraisingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "maxLockingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "maxSupportedAssetCount",
     "outputs": [
       {
@@ -1103,59 +1148,7 @@
   },
   {
     "inputs": [],
-    "name": "maxTradingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "minFundraisingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "minInvestmentAmount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "minLockingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "minTradingPeriod",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1274,6 +1267,19 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_assetHandler",
+        "type": "address"
+      }
+    ],
+    "name": "setAssetHandler",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "newBeraFee",
         "type": "uint256"
@@ -1313,12 +1319,12 @@
   {
     "inputs": [
       {
-        "internalType": "uint8",
-        "name": "_defaultMinManagerSharePercentage",
-        "type": "uint8"
+        "internalType": "uint256",
+        "name": "_defaultFundraisingPeriod",
+        "type": "uint256"
       }
     ],
-    "name": "setDefaultMinManagerSharePercentage",
+    "name": "setDefaultFundraisingPeriod",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1327,16 +1333,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_max",
+        "name": "_defaultLockingPeriod",
         "type": "uint256"
       }
     ],
-    "name": "setFundraisingPeriodLimits",
+    "name": "setDefaultLockingPeriod",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1344,17 +1345,12 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_max",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "_governanceAddress",
+        "type": "address"
       }
     ],
-    "name": "setLockingPeriodLimits",
+    "name": "setGovernanceAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1476,24 +1472,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_max",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTradingPeriodLimits",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "newTreasury",
         "type": "address"
@@ -1528,6 +1506,44 @@
     "name": "setVolumeFee",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      }
+    ],
+    "name": "totalSupplyOfPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      }
+    ],
+    "name": "totalValueInUsdOfPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

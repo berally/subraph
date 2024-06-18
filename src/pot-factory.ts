@@ -4,10 +4,9 @@ import {
   BeraFeeChanged as BeraFeeChangedEvent,
   BerallyPassesAddressChanged as BerallyPassesAddressChangedEvent,
   BexSet as BexSetEvent,
-  FundraisingPeriodLimitsChanged as FundraisingPeriodLimitsChangedEvent,
+  DefaultFundraisingPeriodChanged as DefaultFundraisingPeriodChangedEvent,
   Initialized as InitializedEvent,
-  TradingPeriodLimitsChanged as TradingPeriodLimitsChangedEvent,
-  LockingPeriodLimitsChanged as LockingPeriodLimitsChangedEvent,
+  DefaultLockingPeriodChanged as DefaultLockingPeriodChangedEvent,
   ManagerExitFeeChanged as ManagerExitFeeChangedEvent,
   MaxCapacityPerPotChanged as MaxCapacityPerPotChangedEvent,
   MaxPerformanceFeeChanged as MaxPerformanceFeeChangedEvent,
@@ -30,10 +29,9 @@ import {
   BeraFeeChanged,
   BerallyPassesAddressChanged,
   BexSet,
-  FundraisingPeriodLimitsChanged,
+  DefaultFundraisingPeriodChanged,
   Initialized,
-  TradingPeriodLimitsChanged,
-  LockingPeriodLimitsChanged,
+  DefaultLockingPeriodChanged,
   ManagerExitFeeChanged,
   MaxCapacityPerPotChanged,
   MaxPerformanceFeeChanged,
@@ -106,14 +104,13 @@ export function handleBexSet(event: BexSetEvent): void {
   entity.save()
 }
 
-export function handleFundraisingPeriodLimitsChanged(
-  event: FundraisingPeriodLimitsChangedEvent
+export function handleDefaultFundraisingPeriodChanged(
+  event: DefaultFundraisingPeriodChangedEvent
 ): void {
-  let entity = new FundraisingPeriodLimitsChanged(
+  let entity = new DefaultFundraisingPeriodChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.min = event.params.min
-  entity.max = event.params.max
+  entity.defaultFundraisingPeriod = event.params.defaultFundraisingPeriod
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -135,30 +132,13 @@ export function handleInitialized(event: InitializedEvent): void {
   entity.save()
 }
 
-export function handleTradingPeriodLimitsChanged(
-  event: TradingPeriodLimitsChangedEvent
+export function handleDefaultLockingPeriodChanged(
+  event: DefaultLockingPeriodChangedEvent
 ): void {
-  let entity = new TradingPeriodLimitsChanged(
+  let entity = new DefaultLockingPeriodChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.min = event.params.min
-  entity.max = event.params.max
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleLockingPeriodLimitsChanged(
-  event: LockingPeriodLimitsChangedEvent
-): void {
-  let entity = new LockingPeriodLimitsChanged(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.min = event.params.min
-  entity.max = event.params.max
+  entity.defaultLockingPeriod = event.params.defaultLockingPeriod
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -280,12 +260,10 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.usdToken = event.params.usdToken
   entity.fundraisingDeadline = event.params.fundraisingDeadline
   entity.lockingDeadline = event.params.lockingDeadline
-  entity.investmentDeadline = event.params.tradingDeadline
   entity.maxCapacity = event.params.maxCapacity
   entity.manager = event.params.manager
-  entity.managerFeeNumerator = event.params.managerFeeNumerator
-  entity.managerFeeDenominator = event.params.managerFeeDenominator
-  entity.minManagerSharePercentage = event.params.minManagerSharePercentage
+  entity.performanceFeeNumerator = event.params.performanceFeeNumerator
+  entity.performanceFeeDenominator = event.params.performanceFeeDenominator
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

@@ -3,12 +3,11 @@ import {
   AssetAdded as AssetAddedEvent,
   AssetRemoved as AssetRemovedEvent,
   Claimed as ClaimedEvent,
-  Closed as ClosedEvent,
+  Canceled as CanceledEvent,
   Deposited as DepositedEvent,
   Executed as ExecutedEvent,
   FundraisingClosed as FundraisingClosedEvent,
   Initialized as InitializedEvent,
-  ManagerWithdrawn as ManagerWithdrawnEvent,
   Transfer as TransferEvent,
   Withdrawn as WithdrawnEvent,
 } from "../generated/templates/Pot/Pot"
@@ -17,12 +16,11 @@ import {
   AssetAdded,
   AssetRemoved,
   Claimed,
-  Closed,
+  Canceled,
   Deposited,
   Executed,
   FundraisingClosed,
   Initialized,
-  ManagerWithdrawn,
   Transfer,
   Withdrawn,
   WithdrawnAsset
@@ -88,10 +86,14 @@ export function handleClaimed(event: ClaimedEvent): void {
   entity.save()
 }
 
-export function handleClosed(event: ClosedEvent): void {
-  let entity = new Closed(
+export function handleCanceled(event: CanceledEvent): void {
+  let entity = new Canceled(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
+
+  entity.pot = event.params.pot
+  entity.totalSupply = event.params.totalSupply
+  entity.totalRaisedInUsd = event.params.totalRaisedInUsd
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -122,11 +124,8 @@ export function handleExecuted(event: ExecutedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.pot = event.params.pot
-  entity.fromAsset = event.params.fromAsset
-  entity.fromAmount = event.params.fromAmount
-  entity.toAsset = event.params.toAsset
-  entity.toAmount = event.params.toAmount
-  entity.volumeFee = event.params.volumeFee
+  entity.sender = event.params.sender
+  entity.transactionType = event.params.transactionType
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -144,8 +143,6 @@ export function handleFundraisingClosed(event: FundraisingClosedEvent): void {
   entity.totalRaisedInUsd = event.params.totalRaisedInUsd
   entity.fundraisingDeadline = event.params.fundraisingDeadline
   entity.lockingDeadline = event.params.lockingDeadline
-  entity.tradingDeadline = event.params.tradingDeadline
-  entity.managerSharePercent = event.params.managerSharePercent
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -159,20 +156,6 @@ export function handleInitialized(event: InitializedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.version = event.params.version
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleManagerWithdrawn(event: ManagerWithdrawnEvent): void {
-  let entity = new ManagerWithdrawn(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.pot = event.params.pot
-  entity.shareAmount = event.params.shareAmount
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
