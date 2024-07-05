@@ -7,7 +7,6 @@ import {
   Deposited as DepositedEvent,
   Executed as ExecutedEvent,
   FundraisingClosed as FundraisingClosedEvent,
-  Initialized as InitializedEvent,
   Transfer as TransferEvent,
   Withdrawn as WithdrawnEvent,
 } from "../generated/templates/Pot/Pot"
@@ -20,7 +19,6 @@ import {
   Deposited,
   Executed,
   FundraisingClosed,
-  Initialized,
   Transfer,
   Withdrawn,
   WithdrawnAsset
@@ -151,19 +149,6 @@ export function handleFundraisingClosed(event: FundraisingClosedEvent): void {
   entity.save()
 }
 
-export function handleInitialized(event: InitializedEvent): void {
-  let entity = new Initialized(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.version = event.params.version
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
 export function handleTransfer(event: TransferEvent): void {
   let entity = new Transfer(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
@@ -188,7 +173,6 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   entity.profitPercentage = event.params.profitPercentage
   entity.investor = event.params.investor
   entity.shareAmount = event.params.shareAmount
-  entity.toAsset = event.params.toAsset
   entity.portion = event.params.portion
 
   entity.blockNumber = event.block.number
@@ -205,7 +189,6 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
 
     withdrawnAsset.asset = withdrawnAssetEvent.asset;
     withdrawnAsset.amountOut = withdrawnAssetEvent.amountOut;
-    withdrawnAsset.amountTo = withdrawnAssetEvent.amountTo;
     withdrawnAsset.protocolExitFee = withdrawnAssetEvent.protocolExitFee;
     withdrawnAsset.managerExitFee = withdrawnAssetEvent.managerExitFee;
     withdrawnAsset.performanceFee = withdrawnAssetEvent.performanceFee;

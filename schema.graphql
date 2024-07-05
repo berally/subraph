@@ -22,25 +22,9 @@ type BerallyPassesAddressChanged @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type BexSet @entity(immutable: true) {
-  id: Bytes!
-  bex: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type DefaultFundraisingPeriodChanged @entity(immutable: true) {
   id: Bytes!
   defaultFundraisingPeriod: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Initialized @entity(immutable: true) {
-  id: Bytes!
-  version: Int! # uint8
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -301,7 +285,6 @@ type Withdrawn @entity(immutable: true) {
   profitPercentage: BigInt! # uint256
   investor: Bytes! # address
   shareAmount: BigInt! # uint256
-  toAsset: Bytes! # address
   portion: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -313,7 +296,6 @@ type WithdrawnAsset @entity(immutable: true) {
   withdrawn: Bytes!
   asset: Bytes! # address
   amountOut: BigInt! # uint256
-  amountTo: BigInt! # uint256
   protocolExitFee: BigInt! # uint256
   managerExitFee: BigInt! # uint256
   performanceFee: BigInt! # uint256

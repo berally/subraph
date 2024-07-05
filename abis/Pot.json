@@ -1,195 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "max",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "AboveMax",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "BelowMin",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "FailedTransaction",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "HasClosedFundraising",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "given",
-        "type": "address"
-      }
-    ],
-    "name": "InvalidAddress",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTransaction",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "asset",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "NotEnoughFund",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "NotZeroAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "out",
-        "type": "uint256"
-      }
-    ],
-    "name": "SlippageError",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "desired",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "current",
-        "type": "uint256"
-      }
-    ],
-    "name": "StillFundraising",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      }
-    ],
-    "name": "SwapFailure",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "deadline",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "current",
-        "type": "uint256"
-      }
-    ],
-    "name": "TimeOut",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "UnableToClaimWhenLive",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "UnableToWithdrawWhenNotLive",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "UnableToWithdrawWhileLocking",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroAddress",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "subject",
-        "type": "address"
-      }
-    ],
-    "name": "ZeroSeedBalance",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -417,13 +227,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
         "indexed": false,
-        "internalType": "uint8",
-        "name": "version",
-        "type": "uint8"
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
       }
     ],
-    "name": "Initialized",
+    "name": "PlatformAdded",
     "type": "event"
   },
   {
@@ -485,12 +301,6 @@
         "type": "uint256"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "toAsset",
-        "type": "address"
-      },
-      {
         "indexed": false,
         "internalType": "uint256",
         "name": "portion",
@@ -506,11 +316,6 @@
           {
             "internalType": "uint256",
             "name": "amountOut",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountTo",
             "type": "uint256"
           },
           {
@@ -537,6 +342,19 @@
     ],
     "name": "Withdrawn",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string[]",
+        "name": "_platforms",
+        "type": "string[]"
+      }
+    ],
+    "name": "addPlatforms",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -897,34 +715,41 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "_fundraisingDealine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_lockingDealine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_maxCapacity",
-        "type": "uint256"
-      },
-      {
         "internalType": "address",
         "name": "_manager",
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "_performanceFeeNumerator",
-        "type": "uint256"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "fundraisingDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lockingDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxCapacity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "performanceFee",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IPotFactory.InitInfo",
+        "name": "_info",
+        "type": "tuple"
       },
       {
-        "internalType": "address[]",
-        "name": "_supportedAssets",
-        "type": "address[]"
+        "internalType": "string[]",
+        "name": "_platforms",
+        "type": "string[]"
       }
     ],
     "name": "initialize",
@@ -941,6 +766,25 @@
       }
     ],
     "name": "isSupportedAsset",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_platform",
+        "type": "string"
+      }
+    ],
+    "name": "isSupportedPlatform",
     "outputs": [
       {
         "internalType": "bool",
@@ -993,6 +837,25 @@
   {
     "inputs": [],
     "name": "name",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "platforms",
     "outputs": [
       {
         "internalType": "string",
@@ -1078,7 +941,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "to",
+        "name": "recipient",
         "type": "address"
       },
       {
@@ -1102,12 +965,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "from",
+        "name": "sender",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "to",
+        "name": "recipient",
         "type": "address"
       },
       {
@@ -1148,11 +1011,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "_toAsset",
-        "type": "address"
-      },
-      {
         "components": [
           {
             "internalType": "address",
@@ -1162,11 +1020,6 @@
           {
             "internalType": "uint256",
             "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountTo",
             "type": "uint256"
           }
         ],
@@ -1178,62 +1031,6 @@
     "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_shareAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_toAsset",
-        "type": "address"
-      }
-    ],
-    "name": "withdrawPreview",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "asset",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountOut",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountTo",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "protocolExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "managerExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "performanceFee",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct Pot.WithdrawnAsset[]",
-        "name": "withdrawnAssets",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   }
 ]

@@ -19,9 +19,7 @@ dataSources:
         - AdminChanged
         - BeraFeeChanged
         - BerallyPassesAddressChanged
-        - BexSet
         - DefaultFundraisingPeriodChanged
-        - Initialized
         - DefaultLockingPeriodChanged
         - ManagerExitFeeChanged
         - MaxCapacityPerPotChanged
@@ -49,12 +47,8 @@ dataSources:
           handler: handleBeraFeeChanged
         - event: BerallyPassesAddressChanged(indexed address)
           handler: handleBerallyPassesAddressChanged
-        - event: BexSet(address)
-          handler: handleBexSet
         - event: DefaultFundraisingPeriodChanged(uint256)
           handler: handleDefaultFundraisingPeriodChanged
-        - event: Initialized(uint8)
-          handler: handleInitialized
         - event: DefaultLockingPeriodChanged(uint256)
           handler: handleDefaultLockingPeriodChanged
         - event: ManagerExitFeeChanged(uint256,uint256)
@@ -133,11 +127,9 @@ templates:
           handler: handleExecuted
         - event: FundraisingClosed(indexed address,uint256,uint256,uint256,uint256)
           handler: handleFundraisingClosed
-        - event: Initialized(uint8)
-          handler: handleInitialized
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
         - event: Withdrawn(indexed address,uint256,uint256,indexed
-            address,uint256,indexed address,uint256,(address,uint256,uint256,uint256,uint256,uint256)[])
+            address,uint256,uint256,(address,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
       file: ./src/pot.ts

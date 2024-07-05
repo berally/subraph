@@ -1,127 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "max",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "AboveMax",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "min",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "BelowMin",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "desired",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "given",
-        "type": "address"
-      }
-    ],
-    "name": "NoAccess",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "desired",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "given",
-        "type": "uint256"
-      }
-    ],
-    "name": "NotEqual",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      }
-    ],
-    "name": "SwapFailure",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "UnableToSendFunds",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroAddress",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "subject",
-        "type": "address"
-      }
-    ],
-    "name": "ZeroSeedBalance",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -132,19 +10,6 @@
       }
     ],
     "name": "AdminChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "assetHandler",
-        "type": "address"
-      }
-    ],
-    "name": "AssetHandlerAddressChanged",
     "type": "event"
   },
   {
@@ -171,19 +36,6 @@
       }
     ],
     "name": "BerallyPassesAddressChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "bex",
-        "type": "address"
-      }
-    ],
-    "name": "BexSet",
     "type": "event"
   },
   {
@@ -223,19 +75,6 @@
       }
     ],
     "name": "GovernanceAddressChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "version",
-        "type": "uint8"
-      }
-    ],
-    "name": "Initialized",
     "type": "event"
   },
   {
@@ -307,6 +146,19 @@
       }
     ],
     "name": "MinInvestmentAmountChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oracleAddress",
+        "type": "address"
+      }
+    ],
+    "name": "OracleAddressChanged",
     "type": "event"
   },
   {
@@ -513,19 +365,6 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "WBERA",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -565,13 +404,24 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "assetHandler",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "holder",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOfPasses",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -604,85 +454,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "bexAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "fromAsset",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "fromAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "toAsset",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "usdToken",
-        "type": "address"
-      }
-    ],
-    "name": "createPath",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "poolId",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "assetIn",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountIn",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "assetOut",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountOut",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes",
-            "name": "userData",
-            "type": "bytes"
-          }
-        ],
-        "internalType": "struct IERC20DexModule.BatchSwapStep[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "string",
@@ -698,6 +469,11 @@
         "internalType": "uint256",
         "name": "_performanceFee",
         "type": "uint256"
+      },
+      {
+        "internalType": "string[]",
+        "name": "_platforms",
+        "type": "string[]"
       }
     ],
     "name": "createPot",
@@ -812,11 +588,11 @@
         "type": "address"
       }
     ],
-    "name": "getAssetProtector",
+    "name": "getAssetGuard",
     "outputs": [
       {
         "internalType": "address",
-        "name": "protector",
+        "name": "guard",
         "type": "address"
       }
     ],
@@ -842,6 +618,30 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "externalContract",
+        "type": "address"
+      }
+    ],
+    "name": "getGuard",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "guard",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -887,30 +687,6 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "token0",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "token1",
-        "type": "address"
-      }
-    ],
-    "name": "getPool",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
         "name": "pot",
         "type": "address"
       }
@@ -921,25 +697,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "externalContract",
-        "type": "address"
-      }
-    ],
-    "name": "getProtector",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "protector",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1031,17 +788,7 @@
       },
       {
         "internalType": "address",
-        "name": "_assetHandlerAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_WBERA",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_bex",
+        "name": "_oracleAddress",
         "type": "address"
       }
     ],
@@ -1102,25 +849,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "asset",
-        "type": "address"
-      }
-    ],
-    "name": "isValidAsset",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "maxCapacityPerPot",
     "outputs": [
@@ -1167,6 +895,19 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "oracleAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1267,19 +1008,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_assetHandler",
-        "type": "address"
-      }
-    ],
-    "name": "setAssetHandler",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "newBeraFee",
         "type": "uint256"
@@ -1299,19 +1027,6 @@
       }
     ],
     "name": "setBerallyPasses",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_bexAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setBex",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1424,21 +1139,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_token0",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_token1",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_pool",
+        "name": "_oracleAddress",
         "type": "address"
       }
     ],
-    "name": "setPool",
+    "name": "setOracleAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

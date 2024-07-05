@@ -3,9 +3,7 @@ import {
   AdminChanged as AdminChangedEvent,
   BeraFeeChanged as BeraFeeChangedEvent,
   BerallyPassesAddressChanged as BerallyPassesAddressChangedEvent,
-  BexSet as BexSetEvent,
   DefaultFundraisingPeriodChanged as DefaultFundraisingPeriodChangedEvent,
-  Initialized as InitializedEvent,
   DefaultLockingPeriodChanged as DefaultLockingPeriodChangedEvent,
   ManagerExitFeeChanged as ManagerExitFeeChangedEvent,
   MaxCapacityPerPotChanged as MaxCapacityPerPotChangedEvent,
@@ -28,9 +26,7 @@ import {
   AdminChanged,
   BeraFeeChanged,
   BerallyPassesAddressChanged,
-  BexSet,
   DefaultFundraisingPeriodChanged,
-  Initialized,
   DefaultLockingPeriodChanged,
   ManagerExitFeeChanged,
   MaxCapacityPerPotChanged,
@@ -91,19 +87,6 @@ export function handleBerallyPassesAddressChanged(
   entity.save()
 }
 
-export function handleBexSet(event: BexSetEvent): void {
-  let entity = new BexSet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.bex = event.params.bex
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
 export function handleDefaultFundraisingPeriodChanged(
   event: DefaultFundraisingPeriodChangedEvent
 ): void {
@@ -111,19 +94,6 @@ export function handleDefaultFundraisingPeriodChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.defaultFundraisingPeriod = event.params.defaultFundraisingPeriod
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleInitialized(event: InitializedEvent): void {
-  let entity = new Initialized(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.version = event.params.version
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
