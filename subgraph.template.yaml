@@ -85,6 +85,49 @@ dataSources:
         - event: VolumeFeeChanged(uint256,uint256)
           handler: handleVolumeFeeChanged
       file: ./src/pot-factory.ts
+  - kind: ethereum
+    name: KodiakGuard
+    network: {{ network }}
+    source:
+      address: "{{ kodiakGuard }}"
+      abi: KodiakGuard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ExchangeFrom
+        - ExchangeTo
+      abis:
+        - name: KodiakGuard
+          file: ./abis/KodiakGuard.json
+      eventHandlers:
+        - event: ExchangeFrom(address,address,address,uint256,address)
+          handler: handleExchangeFrom
+        - event: ExchangeTo(address,address,address,address,uint256)
+          handler: handleExchangeTo
+      file: ./src/kodiak-guard.ts
+  - kind: ethereum
+    name: ERC20Guard
+    network: {{ network }}
+    source:
+      address: "{{ erc20Guard }}"
+      abi: ERC20Guard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approve
+      abis:
+        - name: ERC20Guard
+          file: ./abis/ERC20Guard.json
+      eventHandlers:
+        - event: Approve(address,address,address,uint256)
+          handler: handleApprove
+      file: ./src/erc-20-guard.ts
 templates:
   - kind: ethereum
     name: Pot

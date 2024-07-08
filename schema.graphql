@@ -300,3 +300,37 @@ type WithdrawnAsset @entity(immutable: true) {
   managerExitFee: BigInt! # uint256
   performanceFee: BigInt! # uint256
 }
+
+type ExchangeFrom @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  sourceAsset: Bytes! # address
+  sourceAmount: BigInt! # uint256
+  dstAsset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExchangeTo @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  sourceAsset: Bytes! # address
+  dstAsset: Bytes! # address
+  dstAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type Approve @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  token: Bytes! # address
+  spender: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
