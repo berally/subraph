@@ -292,7 +292,7 @@ type Withdrawn @entity(immutable: true) {
 }
 
 type WithdrawnAsset @entity(immutable: true) {
-  id: Bytes!
+  id: ID!
   withdrawn: Bytes!
   asset: Bytes! # address
   amountOut: BigInt! # uint256
