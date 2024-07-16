@@ -299,6 +299,9 @@ type WithdrawnAsset @entity(immutable: true) {
   protocolExitFee: BigInt! # uint256
   managerExitFee: BigInt! # uint256
   performanceFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type ExchangeFrom @entity(immutable: true) {

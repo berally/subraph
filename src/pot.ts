@@ -183,6 +183,7 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
 
   for(let i = 0; i < event.params.withdrawnAssets.length; i++) {
     let withdrawnAssetEvent = event.params.withdrawnAssets[i];
+
     let withdrawnAsset = new WithdrawnAsset(event.logIndex.toString() + withdrawnAssetEvent.asset.toString());
     withdrawnAsset.withdrawn = withdrawnId;
     withdrawnAsset.asset = withdrawnAssetEvent.asset;
@@ -190,6 +191,10 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
     withdrawnAsset.protocolExitFee = withdrawnAssetEvent.protocolExitFee;
     withdrawnAsset.managerExitFee = withdrawnAssetEvent.managerExitFee;
     withdrawnAsset.performanceFee = withdrawnAssetEvent.performanceFee;
+
+    withdrawnAsset.blockNumber = event.block.number
+    withdrawnAsset.blockTimestamp = event.block.timestamp
+    withdrawnAsset.transactionHash = event.transaction.hash
 
     withdrawnAsset.save();
   }
