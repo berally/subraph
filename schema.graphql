@@ -324,7 +324,7 @@ type ExchangeTo @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
-type Approve @entity(immutable: true) {
+type ERC20Approval @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
   token: Bytes! # address

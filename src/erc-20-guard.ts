@@ -1,10 +1,10 @@
 import {
-  Approve as ApproveEvent
+  ERC20Approval as ERC20ApprovalEvent
 } from "../generated/ERC20Guard/ERC20Guard"
-import { Approve } from "../generated/schema"
+import { ERC20Approval } from "../generated/schema"
 
-export function handleApprove(event: ApproveEvent): void {
-  let entity = new Approve(
+export function handleERC20Approval(event: ERC20ApprovalEvent): void {
+  let entity = new ERC20Approval(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.pot = event.params.pot

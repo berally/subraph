@@ -120,13 +120,13 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approve
+        - ERC20Approval
       abis:
         - name: ERC20Guard
           file: ./abis/ERC20Guard.json
       eventHandlers:
-        - event: Approve(address,address,address,uint256)
-          handler: handleApprove
+        - event: ERC20Approval(address,address,address,uint256)
+          handler: handleERC20Approval
       file: ./src/erc-20-guard.ts
 templates:
   - kind: ethereum
