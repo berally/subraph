@@ -36,7 +36,6 @@ dataSources:
         - TreasuryChanged
         - Unpaused
         - UsdTokenChanged
-        - VolumeFeeChanged
       abis:
         - name: PotFactory
           file: ./abis/PotFactory.json
@@ -82,8 +81,6 @@ dataSources:
           handler: handleUnpaused
         - event: UsdTokenChanged(indexed address)
           handler: handleUsdTokenChanged
-        - event: VolumeFeeChanged(uint256,uint256)
-          handler: handleVolumeFeeChanged
       file: ./src/pot-factory.ts
   - kind: ethereum
     name: KodiakGuard
@@ -172,7 +169,7 @@ templates:
           handler: handleFundraisingClosed
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-        - event: Withdrawn(indexed address,uint256,uint256,indexed
-            address,uint256,uint256,(address,uint256,uint256,uint256,uint256)[])
+        - event: Withdrawn(indexed address,uint256,indexed
+            address,uint256,(address,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
       file: ./src/pot.ts

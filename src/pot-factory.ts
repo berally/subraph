@@ -19,8 +19,7 @@ import {
   TokenRemoved as TokenRemovedEvent,
   TreasuryChanged as TreasuryChangedEvent,
   Unpaused as UnpausedEvent,
-  UsdTokenChanged as UsdTokenChangedEvent,
-  VolumeFeeChanged as VolumeFeeChangedEvent
+  UsdTokenChanged as UsdTokenChangedEvent
 } from "../generated/PotFactory/PotFactory"
 import {
   AdminChanged,
@@ -42,8 +41,7 @@ import {
   TokenRemoved,
   TreasuryChanged,
   Unpaused,
-  UsdTokenChanged,
-  VolumeFeeChanged
+  UsdTokenChanged
 } from "../generated/schema"
 
 export function handleAdminChanged(event: AdminChangedEvent): void {
@@ -332,20 +330,6 @@ export function handleUsdTokenChanged(event: UsdTokenChangedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.usd = event.params.usd
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleVolumeFeeChanged(event: VolumeFeeChangedEvent): void {
-  let entity = new VolumeFeeChanged(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.numerator = event.params.numerator
-  entity.denominator = event.params.denominator
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

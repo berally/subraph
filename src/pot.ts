@@ -170,10 +170,8 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   let entity = new Withdrawn(withdrawnId)
   entity.pot = event.params.pot
   entity.sharePrice = event.params.sharePrice
-  entity.profitPercentage = event.params.profitPercentage
   entity.investor = event.params.investor
   entity.shareAmount = event.params.shareAmount
-  entity.portion = event.params.portion
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
