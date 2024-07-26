@@ -165,6 +165,7 @@ templates:
           handler: handleDeposited
         - event: Executed(indexed address,address,uint16)
           handler: handleExecuted
+          receipt: true
         - event: FundraisingClosed(indexed address,uint256,uint256,uint256,uint256)
           handler: handleFundraisingClosed
         - event: Transfer(indexed address,indexed address,uint256)

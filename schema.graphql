@@ -317,12 +317,24 @@ type ExchangeTo @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
 type ERC20Approval @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
   token: Bytes! # address
   spender: Bytes! # address
   amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExecutedLog @entity(immutable: true) {
+  id: ID!
+  address: Bytes! # address
+  topics: [Bytes!]
+  data: Bytes!
+  logIndex: BigInt
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

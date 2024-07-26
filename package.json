@@ -9,7 +9,7 @@
     "build": "graph build",
 
     "deploy:pot:sepolia": "graph deploy --node https://api.studio.thegraph.com/deploy/ berally/pot-sepolia",
-    "deploy:berachain-testnet": "goldsky subgraph deploy berally-pot-testnet-v2/2.0.1 --path ."
+    "deploy:berachain-testnet": "goldsky subgraph deploy berally-pot-testnet-v2/2.0.2 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",

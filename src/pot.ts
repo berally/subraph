@@ -18,6 +18,7 @@ import {
   Canceled,
   Deposited,
   Executed,
+  ExecutedLog,
   FundraisingClosed,
   Transfer,
   Withdrawn,
@@ -118,9 +119,8 @@ export function handleDeposited(event: DepositedEvent): void {
 }
 
 export function handleExecuted(event: ExecutedEvent): void {
-  let entity = new Executed(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
+  let executedId = event.transaction.hash.concatI32(event.logIndex.toI32())
+  let entity = new Executed(executedId)
   entity.pot = event.params.pot
   entity.sender = event.params.sender
   entity.transactionType = event.params.transactionType
@@ -130,6 +130,26 @@ export function handleExecuted(event: ExecutedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  if(event.receipt) {
+    for(let i = 0; i < event.receipt!.logs.length; i++) {
+      const receiptLog = event.receipt!.logs[i];
+      let log = new ExecutedLog(
+        event.logIndex.toString() + receiptLog.logIndex.toString()
+      )
+
+      log.address = receiptLog.address
+      log.data = receiptLog.data
+      log.topics = receiptLog.topics
+      log.logIndex = receiptLog.logIndex
+
+      log.blockNumber = event.block.number
+      log.blockTimestamp = event.block.timestamp
+      log.transactionHash = event.transaction.hash
+
+      log.save()
+    }
+  }
 }
 
 export function handleFundraisingClosed(event: FundraisingClosedEvent): void {
