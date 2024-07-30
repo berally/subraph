@@ -135,7 +135,7 @@ export function handleExecuted(event: ExecutedEvent): void {
     for(let i = 0; i < event.receipt!.logs.length; i++) {
       const receiptLog = event.receipt!.logs[i];
       let log = new ExecutedLog(
-        event.logIndex.toString() + receiptLog.logIndex.toString()
+        event.logIndex.toString() + receiptLog.address.toString() + receiptLog.data.toString()
       )
 
       log.address = receiptLog.address
