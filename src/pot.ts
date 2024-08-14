@@ -135,7 +135,7 @@ export function handleExecuted(event: ExecutedEvent): void {
     for(let i = 0; i < event.receipt!.logs.length; i++) {
       const receiptLog = event.receipt!.logs[i];
       let log = new ExecutedLog(
-        event.logIndex.toString() + receiptLog.address.toString() + receiptLog.data.toString()
+        event.transaction.hash.toHexString() + "-" + i.toString(),
       )
 
       log.address = receiptLog.address
@@ -202,7 +202,7 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   for(let i = 0; i < event.params.withdrawnAssets.length; i++) {
     let withdrawnAssetEvent = event.params.withdrawnAssets[i];
 
-    let withdrawnAsset = new WithdrawnAsset(event.logIndex.toString() + withdrawnAssetEvent.asset.toString());
+    let withdrawnAsset = new WithdrawnAsset(event.transaction.hash.toHexString() + "-" + i.toString());
     withdrawnAsset.withdrawn = withdrawnId;
     withdrawnAsset.asset = withdrawnAssetEvent.asset;
     withdrawnAsset.amountOut = withdrawnAssetEvent.amountOut;
