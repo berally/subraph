@@ -9,7 +9,7 @@
     "build": "graph build",
 
     "deploy:passes:sepolia": "graph deploy --node https://api.studio.thegraph.com/deploy/ berally/passes-sepolia",
-    "deploy:passes:berally-bartio-passes": "goldsky subgraph deploy berally-bartio-passes/2.0.1 --path .",
+    "deploy:passes:berally-bartio-passes": "goldsky subgraph deploy berally-bartio-passes/1.0.0 --path .",
     "deploy:passes:bartio-berally-passes-testnet": "goldsky subgraph deploy bartio-berally-passes-testnet/1.0.0 --path ."
   },
   "dependencies": {
