@@ -35,4 +35,8 @@ dataSources:
           handler: handleProtocolFeePercentageChanged
         - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleTrade
+        - event: Approval(address,address,address,uint256)
+          handler: handleApproval
+        - event: Transfer(address,address,address,uint256)
+          handler: handleTransfer
       file: ./src/berally-passes.ts
