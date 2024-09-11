@@ -18,9 +18,13 @@ dataSources:
       entities:
         - Initialized
         - ManagerFeePercentageChanged
+        - ReferralFeePercentageChanged
         - OwnershipTransferred
         - ProtocolFeePercentageChanged
+        - TransferFeeChanged
         - Trade
+        - Approval
+        - Transfer
       abis:
         - name: BerallyPasses
           file: ./abis/BerallyPasses.json
@@ -29,11 +33,15 @@ dataSources:
           handler: handleInitialized
         - event: ManagerFeePercentageChanged(uint256)
           handler: handleManagerFeePercentageChanged
+        - event: ReferralFeePercentageChanged(uint256)
+          handler: handleReferralFeePercentageChanged
+        - event: TransferFeeChanged(uint256)
+          handler: handleTransferFeeChanged
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
         - event: ProtocolFeePercentageChanged(uint256)
           handler: handleProtocolFeePercentageChanged
-        - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)
           handler: handleTrade
         - event: Approval(address,address,address,uint256)
           handler: handleApproval

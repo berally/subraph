@@ -14,6 +14,14 @@ type ManagerFeePercentageChanged @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type ReferralFeePercentageChanged @entity(immutable: true) {
+  id: Bytes!
+  feePercentage: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type OwnershipTransferred @entity(immutable: true) {
   id: Bytes!
   previousOwner: Bytes! # address
@@ -31,6 +39,14 @@ type ProtocolFeePercentageChanged @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type TransferFeeChanged @entity(immutable: true) {
+  id: Bytes!
+  transferFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type Trade @entity(immutable: true) {
   id: Bytes!
   trader: Bytes! # address
@@ -40,6 +56,8 @@ type Trade @entity(immutable: true) {
   beraAmount: BigInt! # uint256
   protocolBeraAmount: BigInt! # uint256
   managerBeraAmount: BigInt! # uint256
+  referral: Bytes! # address
+  referralBeraAmount: BigInt! # uint256
   supply: BigInt! # uint256
   factor: BigInt! # uint256
   blockNumber: BigInt!

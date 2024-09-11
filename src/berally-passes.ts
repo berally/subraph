@@ -1,6 +1,8 @@
 import {
   Initialized as InitializedEvent,
   ManagerFeePercentageChanged as ManagerFeePercentageChangedEvent,
+  ReferralFeePercentageChanged as ReferralFeePercentageChangedEvent,
+  TransferFeeChanged as TransferFeeChangedEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
   ProtocolFeePercentageChanged as ProtocolFeePercentageChangedEvent,
   Trade as TradeEvent,
@@ -10,6 +12,8 @@ import {
 import {
   Initialized,
   ManagerFeePercentageChanged,
+  ReferralFeePercentageChanged,
+  TransferFeeChanged,
   OwnershipTransferred,
   ProtocolFeePercentageChanged,
   Trade,
@@ -37,6 +41,36 @@ export function handleManagerFeePercentageChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.feePercentage = event.params.feePercentage
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleReferralFeePercentageChanged(
+  event: ReferralFeePercentageChangedEvent
+): void {
+  let entity = new ReferralFeePercentageChanged(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.feePercentage = event.params.feePercentage
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleTransferFeeChanged(
+  event: TransferFeeChangedEvent
+): void {
+  let entity = new TransferFeeChanged(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.transferFee = event.params.transferFee
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -87,6 +121,8 @@ export function handleTrade(event: TradeEvent): void {
   entity.beraAmount = event.params.beraAmount
   entity.protocolBeraAmount = event.params.protocolBeraAmount
   entity.managerBeraAmount = event.params.managerBeraAmount
+  entity.referral = event.params.referral
+  entity.referralBeraAmount = event.params.referralBeraAmount
   entity.supply = event.params.supply
   entity.factor = event.params.factor
 
