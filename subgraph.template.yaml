@@ -47,4 +47,6 @@ dataSources:
           handler: handleApproval
         - event: Transfer(address,address,address,uint256)
           handler: handleTransfer
+        - event: UpdateWhitelist(address,bool)
+          handler: handleUpdateWhitelist
       file: ./src/berally-passes.ts

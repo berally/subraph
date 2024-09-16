@@ -219,17 +219,23 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "admin",
-    "outputs": [
+    "anonymous": false,
+    "inputs": [
       {
+        "indexed": false,
         "internalType": "address",
-        "name": "",
+        "name": "account",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "whitelisted",
+        "type": "bool"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "name": "UpdateWhitelist",
+    "type": "event"
   },
   {
     "inputs": [
@@ -633,19 +639,6 @@
     "name": "sellPasses",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_admin",
-        "type": "address"
-      }
-    ],
-    "name": "setAdmin",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

@@ -86,3 +86,12 @@ type Transfer @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type UpdateWhitelist @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  whitelisted: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

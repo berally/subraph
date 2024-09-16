@@ -7,7 +7,8 @@ import {
   ProtocolFeePercentageChanged as ProtocolFeePercentageChangedEvent,
   Trade as TradeEvent,
   Approval as ApprovalEvent,
-  Transfer as TransferEvent
+  Transfer as TransferEvent,
+  UpdateWhitelist as UpdateWhitelistEvent
 } from "../generated/BerallyPasses/BerallyPasses"
 import {
   Initialized,
@@ -18,7 +19,8 @@ import {
   ProtocolFeePercentageChanged,
   Trade,
   Approval,
-  Transfer
+  Transfer,
+  UpdateWhitelist
 } from "../generated/schema"
 
 export function handleInitialized(event: InitializedEvent): void {
@@ -158,6 +160,20 @@ export function handleTransfer(event: TransferEvent): void {
   entity.receiver = event.params.receiver
   entity.manager = event.params.manager
   entity.amount = event.params.amount
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleUpdateWhitelist(event: UpdateWhitelistEvent): void {
+  let entity = new UpdateWhitelist(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.account = event.params.account
+  entity.whitelisted = event.params.whitelisted
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
