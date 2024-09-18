@@ -65,7 +65,7 @@ dataSources:
         - event: Paused(address)
           handler: handlePaused
         - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,indexed
-            address,uint256,uint256)
+            address,uint256,uint256,uint256)
           handler: handlePotCreated
         - event: PotImplementationChanged(indexed address)
           handler: handlePotImplementationChanged

@@ -106,6 +106,7 @@ type PotCreated @entity(immutable: true) {
   manager: Bytes! # address
   performanceFeeNumerator: BigInt! # uint256
   performanceFeeDenominator: BigInt! # uint256
+  potId: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

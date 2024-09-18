@@ -232,6 +232,7 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.manager = event.params.manager
   entity.performanceFeeNumerator = event.params.performanceFeeNumerator
   entity.performanceFeeDenominator = event.params.performanceFeeDenominator
+  entity.potId = event.params.id
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
