@@ -5,11 +5,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: BerallyPasses
+    name: Rewards
     network: {{ network }}
     source:
       address: "{{ address }}"
-      abi: BerallyPasses
+      abi: Rewards
       startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
@@ -26,27 +26,13 @@ dataSources:
         - Approval
         - Transfer
       abis:
-        - name: BerallyPasses
-          file: ./abis/BerallyPasses.json
+        - name: Rewards
+          file: ./abis/Rewards.json
       eventHandlers:
-        - event: Initialized(uint8)
-          handler: handleInitialized
-        - event: ManagerFeePercentageChanged(uint256)
-          handler: handleManagerFeePercentageChanged
-        - event: ReferralFeePercentageChanged(uint256)
-          handler: handleReferralFeePercentageChanged
-        - event: TransferFeeChanged(uint256)
-          handler: handleTransferFeeChanged
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: ProtocolFeePercentageChanged(uint256)
-          handler: handleProtocolFeePercentageChanged
-        - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)
-          handler: handleTrade
-        - event: Approval(address,address,address,uint256)
-          handler: handleApproval
-        - event: Transfer(address,address,address,uint256)
-          handler: handleTransfer
-        - event: UpdateWhitelist(address,bool)
-          handler: handleUpdateWhitelist
-      file: ./src/berally-passes.ts
+        - event: Created(uint16,uint8,uint256,uint256)
+          handler: handleCreated
+        - event: Updated(uint16,uint8,uint256,uint256)
+          handler: handleUpdated
+        - event: Claimed(uint16,uint8,address,uint256)
+          handler: handleClaimed
+      file: ./src/rewards.ts

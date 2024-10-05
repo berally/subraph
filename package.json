@@ -2,15 +2,11 @@
   "name": "berally-passes",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare:sepolia": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "prepare:berachain-testnet": "mustache config/berachain-testnet.json subgraph.template.yaml > subgraph.yaml",
-
     "codegen": "graph codegen",
     "build": "graph build",
 
-    "deploy:passes:bartio-berally-passes-testnet": "goldsky subgraph deploy bartio-berally-passes-testnet/1.0.0 --path .",
-    "deploy:passes:berally-passes-testnet-v2": "goldsky subgraph deploy berally-passes-testnet-v2/2.0.2 --path .",
-    "deploy:passes:berally-passes-testnet-performance": "goldsky subgraph deploy berally-passes-testnet-performance/1.0.0 --path ."
+    "deploy:rewards:testnet": "goldsky subgraph deploy testnet-rewards/1.0.0 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",

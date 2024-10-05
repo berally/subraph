@@ -1,5 +1,5 @@
 {
     "network": "berachain-bartio",
-    "address": "",
-    "startBlock": 0
+    "address": "0x3ef77217980D32286A77E40F70D040c8c39d8263",
+    "startBlock": 5165235
 }
