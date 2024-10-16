@@ -39,14 +39,6 @@ type ProtocolFeePercentageChanged @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type TransferFeeChanged @entity(immutable: true) {
-  id: Bytes!
-  transferFee: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type Trade @entity(immutable: true) {
   id: Bytes!
   trader: Bytes! # address
@@ -60,37 +52,6 @@ type Trade @entity(immutable: true) {
   referralBeraAmount: BigInt! # uint256
   supply: BigInt! # uint256
   factor: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  manager: Bytes! # address
-  amount: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Transfer @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  receiver: Bytes! # address
-  manager: Bytes! # address
-  amount: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type UpdateWhitelist @entity(immutable: true) {
-  id: Bytes!
-  account: Bytes! # address
-  whitelisted: Boolean! # bool
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

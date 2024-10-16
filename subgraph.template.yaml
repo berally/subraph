@@ -5,11 +5,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: BerallyPasses
+    name: Passes
     network: {{ network }}
     source:
       address: "{{ address }}"
-      abi: BerallyPasses
+      abi: Passes
       startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
@@ -26,8 +26,8 @@ dataSources:
         - Approval
         - Transfer
       abis:
-        - name: BerallyPasses
-          file: ./abis/BerallyPasses.json
+        - name: Passes
+          file: ./abis/Passes.json
       eventHandlers:
         - event: Initialized(uint8)
           handler: handleInitialized
@@ -35,18 +35,10 @@ dataSources:
           handler: handleManagerFeePercentageChanged
         - event: ReferralFeePercentageChanged(uint256)
           handler: handleReferralFeePercentageChanged
-        - event: TransferFeeChanged(uint256)
-          handler: handleTransferFeeChanged
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
         - event: ProtocolFeePercentageChanged(uint256)
           handler: handleProtocolFeePercentageChanged
         - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)
           handler: handleTrade
-        - event: Approval(address,address,address,uint256)
-          handler: handleApproval
-        - event: Transfer(address,address,address,uint256)
-          handler: handleTransfer
-        - event: UpdateWhitelist(address,bool)
-          handler: handleUpdateWhitelist
-      file: ./src/berally-passes.ts
+      file: ./src/passes.ts
