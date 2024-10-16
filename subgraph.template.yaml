@@ -18,7 +18,7 @@ dataSources:
       entities:
         - AdminChanged
         - BeraFeeChanged
-        - BerallyPassesAddressChanged
+        - PassesAddressChanged
         - DefaultFundraisingPeriodChanged
         - DefaultLockingPeriodChanged
         - ManagerExitFeeChanged
@@ -44,8 +44,8 @@ dataSources:
           handler: handleAdminChanged
         - event: BeraFeeChanged(uint256)
           handler: handleBeraFeeChanged
-        - event: BerallyPassesAddressChanged(indexed address)
-          handler: handleBerallyPassesAddressChanged
+        - event: PassesAddressChanged(indexed address)
+          handler: handlePassesAddressChanged
         - event: DefaultFundraisingPeriodChanged(uint256)
           handler: handleDefaultFundraisingPeriodChanged
         - event: DefaultLockingPeriodChanged(uint256)

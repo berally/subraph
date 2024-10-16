@@ -2,7 +2,7 @@ import { Pot } from '../generated/templates'
 import {
   AdminChanged as AdminChangedEvent,
   BeraFeeChanged as BeraFeeChangedEvent,
-  BerallyPassesAddressChanged as BerallyPassesAddressChangedEvent,
+  PassesAddressChanged as PassesAddressChangedEvent,
   DefaultFundraisingPeriodChanged as DefaultFundraisingPeriodChangedEvent,
   DefaultLockingPeriodChanged as DefaultLockingPeriodChangedEvent,
   ManagerExitFeeChanged as ManagerExitFeeChangedEvent,
@@ -24,7 +24,7 @@ import {
 import {
   AdminChanged,
   BeraFeeChanged,
-  BerallyPassesAddressChanged,
+  PassesAddressChanged,
   DefaultFundraisingPeriodChanged,
   DefaultLockingPeriodChanged,
   ManagerExitFeeChanged,
@@ -70,13 +70,13 @@ export function handleBeraFeeChanged(event: BeraFeeChangedEvent): void {
   entity.save()
 }
 
-export function handleBerallyPassesAddressChanged(
-  event: BerallyPassesAddressChangedEvent
+export function handlePassesAddressChanged(
+  event: PassesAddressChangedEvent
 ): void {
-  let entity = new BerallyPassesAddressChanged(
+  let entity = new PassesAddressChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.berallyPasses = event.params.berallyPasses
+  entity.passes = event.params.passes
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

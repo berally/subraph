@@ -29,19 +29,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "berallyPasses",
-        "type": "address"
-      }
-    ],
-    "name": "BerallyPassesAddressChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": false,
         "internalType": "uint256",
         "name": "defaultFundraisingPeriod",
@@ -178,6 +165,19 @@
       }
     ],
     "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "passes",
+        "type": "address"
+      }
+    ],
+    "name": "PassesAddressChanged",
     "type": "event"
   },
   {
@@ -422,19 +422,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "berallyPasses",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -818,7 +805,7 @@
       },
       {
         "internalType": "address",
-        "name": "_berallyPasses",
+        "name": "_passes",
         "type": "address"
       },
       {
@@ -968,6 +955,19 @@
   },
   {
     "inputs": [],
+    "name": "passes",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "pause",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -1073,19 +1073,6 @@
       }
     ],
     "name": "setBeraFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_berallyPasses",
-        "type": "address"
-      }
-    ],
-    "name": "setBerallyPasses",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1216,6 +1203,19 @@
       }
     ],
     "name": "setOracleAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_passes",
+        "type": "address"
+      }
+    ],
+    "name": "setPasses",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

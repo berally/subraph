@@ -14,9 +14,9 @@ type BeraFeeChanged @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type BerallyPassesAddressChanged @entity(immutable: true) {
+type PassesAddressChanged @entity(immutable: true) {
   id: Bytes!
-  berallyPasses: Bytes! # address
+  passes: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

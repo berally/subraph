@@ -1,7 +1,7 @@
 {
     "network": "berachain-bartio",
-    "address": "",
+    "address": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4",
     "startBlock": 0,
-    "erc20Guard": "",
-    "kodiakGuard": ""
+    "erc20Guard": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4",
+    "kodiakGuard": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4"
 }
