@@ -233,6 +233,7 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.performanceFeeNumerator = event.params.performanceFeeNumerator
   entity.performanceFeeDenominator = event.params.performanceFeeDenominator
   entity.potId = event.params.id
+  entity.potType = event.params.potType
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -249,7 +250,9 @@ export function handlePotImplementationChanged(
   let entity = new PotImplementationChanged(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.df = event.params.df
+
+  entity.potType = event.params.potType
+  entity.implementation = event.params.implementation
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
