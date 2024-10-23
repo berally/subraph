@@ -9,7 +9,7 @@ import {
   FundraisingClosed as FundraisingClosedEvent,
   Transfer as TransferEvent,
   Withdrawn as WithdrawnEvent,
-} from "../generated/templates/Pot/Pot"
+} from "../generated/templates/FlexiblePot/FlexiblePot"
 import {
   Approval,
   AssetAdded,

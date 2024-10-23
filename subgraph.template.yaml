@@ -28,7 +28,8 @@ dataSources:
         - MinInvestmentAmountChanged
         - OwnershipTransferred
         - Paused
-        - PotCreated
+        - FlexiblePotCreated
+        - NonFlexiblePotCreated
         - PotImplementationChanged
         - ProtocolExitFeeChanged
         - TokenAdded
@@ -64,14 +65,17 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: Paused(address)
           handler: handlePaused
-        - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,indexed
+        - event: FlexiblePotCreated(indexed address,indexed address,uint256,uint256,uint256,indexed
             address,uint256,uint256,uint256,uint8)
-          handler: handlePotCreated
-        - event: PotImplementationChanged(uint8,indexed address)
+          handler: handleFlexiblePotCreated
+        - event: NonFlexiblePotCreated(indexed address,indexed address,uint256,uint256,indexed
+            address,uint256,uint256,uint256,uint8)
+          handler: handleNonFlexiblePotCreated
+        - event: PotImplementationChanged(uint8,indexed address,uint32)
           handler: handlePotImplementationChanged
         - event: ProtocolExitFeeChanged(uint256,uint256)
           handler: handleProtocolExitFeeChanged
-        - event: TokenAdded(address)
+        - event: TokenAdded(address,uint16)
           handler: handleTokenAdded
         - event: TokenRemoved(address)
           handler: handleTokenRemoved
@@ -105,6 +109,29 @@ dataSources:
         - event: ExchangeTo(address,address,address,address,uint256)
           handler: handleExchangeTo
       file: ./src/kodiak-guard.ts
+  - kind: ethereum
+    name: KodiakLiquidityGuard
+    network: {{ network }}
+    source:
+      address: "{{ kodiakLiquidityGuard }}"
+      abi: KodiakLiquidityGuard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddLiquidity
+        - RemoveLiquidity
+      abis:
+        - name: KodiakLiquidityGuard
+          file: ./abis/KodiakLiquidityGuard.json
+      eventHandlers:
+        - event: AddLiquidity(address,address,address,bytes)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(address,address,address,bytes)
+          handler: handleRemoveLiquidity
+      file: ./src/kodiak-liquidity-guard.ts
   - kind: ethereum
     name: MemeSwapGuard
     network: {{ network }}
@@ -171,12 +198,32 @@ dataSources:
         - event: ERC20Approval(address,address,address,uint256)
           handler: handleERC20Approval
       file: ./src/erc-20-guard.ts
+  - kind: ethereum
+    name: ERC20KodiakLPGuard
+    network: {{ network }}
+    source:
+      address: "{{ erc20KodiakLPGuard }}"
+      abi: ERC20KodiakLPGuard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ERC20Approval
+      abis:
+        - name: ERC20KodiakLPGuard
+          file: ./abis/ERC20KodiakLPGuard.json
+      eventHandlers:
+        - event: ERC20Approval(address,address,address,uint256)
+          handler: handleERC20Approval
+      file: ./src/erc-20-kodiak-lp-guard.ts
 templates:
   - kind: ethereum
-    name: Pot
+    name: FlexiblePot
     network: {{network}}
     source:
-      abi: Pot
+      abi: FlexiblePot
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -194,8 +241,8 @@ templates:
         - Transfer
         - Withdrawn
       abis:
-        - name: Pot
-          file: ./abis/Pot.json
+        - name: FlexiblePot
+          file: ./abis/FlexiblePot.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -219,7 +266,7 @@ templates:
         - event: Withdrawn(indexed address,uint256,indexed
             address,uint256,(address,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
-      file: ./src/pot.ts
+      file: ./src/flexible-pot.ts
   - kind: ethereum
     name: NonFlexiblePot
     network: {{network}}
@@ -260,7 +307,7 @@ templates:
         - event: Executed(indexed address,address,uint16)
           handler: handleExecuted
           receipt: true
-        - event: FundraisingClosed(indexed address,uint256,uint256,uint256,uint256)
+        - event: FundraisingClosed(indexed address,uint256,uint256,uint256)
           handler: handleFundraisingClosed
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer

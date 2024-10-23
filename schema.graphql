@@ -96,7 +96,7 @@ type Paused @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PotCreated @entity(immutable: true) {
+type FlexiblePotCreated @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
   usdToken: Bytes! # address
@@ -107,7 +107,21 @@ type PotCreated @entity(immutable: true) {
   performanceFeeNumerator: BigInt! # uint256
   performanceFeeDenominator: BigInt! # uint256
   potId: BigInt! # uint256
-  potType: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NonFlexiblePotCreated @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  usdToken: Bytes! # address
+  fundraisingDeadline: BigInt! # uint256
+  maxCapacity: BigInt! # uint256
+  manager: Bytes! # address
+  performanceFeeNumerator: BigInt! # uint256
+  performanceFeeDenominator: BigInt! # uint256
+  potId: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -117,6 +131,7 @@ type PotImplementationChanged @entity(immutable: true) {
   id: Bytes!
   potType: Int! # uint8
   implementation: Bytes! # address
+  version: BigInt! # uint32
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -134,6 +149,7 @@ type ProtocolExitFeeChanged @entity(immutable: true) {
 type TokenAdded @entity(immutable: true) {
   id: Bytes!
   asset: Bytes! # address
+  tokenType: Int!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -292,6 +308,26 @@ type WithdrawnAsset @entity(immutable: true) {
   protocolExitFee: BigInt! # uint256
   managerExitFee: BigInt! # uint256
   performanceFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AddLiquidity @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  asset: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RemoveLiquidity @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  asset: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

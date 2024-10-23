@@ -1,4 +1,4 @@
-import { Pot } from '../generated/templates'
+import { FlexiblePot, NonFlexiblePot } from '../generated/templates'
 import {
   AdminChanged as AdminChangedEvent,
   BeraFeeChanged as BeraFeeChangedEvent,
@@ -12,7 +12,8 @@ import {
   MinInvestmentAmountChanged as MinInvestmentAmountChangedEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
   Paused as PausedEvent,
-  PotCreated as PotCreatedEvent,
+  FlexiblePotCreated as FlexiblePotCreatedEvent,
+  NonFlexiblePotCreated as NonFlexiblePotCreatedEvent,
   PotImplementationChanged as PotImplementationChangedEvent,
   ProtocolExitFeeChanged as ProtocolExitFeeChangedEvent,
   TokenAdded as TokenAddedEvent,
@@ -34,7 +35,8 @@ import {
   MinInvestmentAmountChanged,
   OwnershipTransferred,
   Paused,
-  PotCreated,
+  FlexiblePotCreated,
+  NonFlexiblePotCreated,
   PotImplementationChanged,
   ProtocolExitFeeChanged,
   TokenAdded,
@@ -220,8 +222,8 @@ export function handlePaused(event: PausedEvent): void {
   entity.save()
 }
 
-export function handlePotCreated(event: PotCreatedEvent): void {
-  let entity = new PotCreated(
+export function handleFlexiblePotCreated(event: FlexiblePotCreatedEvent): void {
+  let entity = new FlexiblePotCreated(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.pot = event.params.pot
@@ -233,7 +235,6 @@ export function handlePotCreated(event: PotCreatedEvent): void {
   entity.performanceFeeNumerator = event.params.performanceFeeNumerator
   entity.performanceFeeDenominator = event.params.performanceFeeDenominator
   entity.potId = event.params.id
-  entity.potType = event.params.potType
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -241,7 +242,29 @@ export function handlePotCreated(event: PotCreatedEvent): void {
 
   entity.save()
 
-  Pot.create(event.params.pot)
+  FlexiblePot.create(event.params.pot)
+}
+
+export function handleNonFlexiblePotCreated(event: NonFlexiblePotCreatedEvent): void {
+  let entity = new NonFlexiblePotCreated(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.pot = event.params.pot
+  entity.usdToken = event.params.usdToken
+  entity.fundraisingDeadline = event.params.fundraisingDeadline
+  entity.maxCapacity = event.params.maxCapacity
+  entity.manager = event.params.manager
+  entity.performanceFeeNumerator = event.params.performanceFeeNumerator
+  entity.performanceFeeDenominator = event.params.performanceFeeDenominator
+  entity.potId = event.params.id
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+
+  NonFlexiblePot.create(event.params.pot)
 }
 
 export function handlePotImplementationChanged(
@@ -253,6 +276,7 @@ export function handlePotImplementationChanged(
 
   entity.potType = event.params.potType
   entity.implementation = event.params.implementation
+  entity.version = event.params.version
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -281,7 +305,8 @@ export function handleTokenAdded(event: TokenAddedEvent): void {
   let entity = new TokenAdded(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.asset = event.params.asset
+  entity.asset = event.params.token
+  entity.tokenType = event.params.tokenType
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -294,7 +319,7 @@ export function handleTokenRemoved(event: TokenRemovedEvent): void {
   let entity = new TokenRemoved(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.asset = event.params.asset
+  entity.asset = event.params.token
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
