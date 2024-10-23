@@ -65,9 +65,9 @@ dataSources:
         - event: Paused(address)
           handler: handlePaused
         - event: PotCreated(indexed address,indexed address,uint256,uint256,uint256,indexed
-            address,uint256,uint256,uint256)
+            address,uint256,uint256,uint256,uint8)
           handler: handlePotCreated
-        - event: PotImplementationChanged(indexed address)
+        - event: PotImplementationChanged(uint8,indexed address)
           handler: handlePotImplementationChanged
         - event: ProtocolExitFeeChanged(uint256,uint256)
           handler: handleProtocolExitFeeChanged
@@ -220,3 +220,51 @@ templates:
             address,uint256,(address,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
       file: ./src/pot.ts
+  - kind: ethereum
+    name: NonFlexiblePot
+    network: {{network}}
+    source:
+      abi: NonFlexiblePot
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - AssetAdded
+        - AssetRemoved
+        - Canceled
+        - Claimed
+        - Deposited
+        - Executed
+        - FundraisingClosed
+        - PotInitialized
+        - Transfer
+        - Withdrawn
+      abis:
+        - name: NonFlexiblePot
+          file: ./abis/NonFlexiblePot.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: AssetAdded(indexed address,address)
+          handler: handleAssetAdded
+        - event: AssetRemoved(address,address)
+          handler: handleAssetRemoved
+        - event: Canceled(indexed address,uint256,uint256)
+          handler: handleCanceled
+        - event: Claimed(indexed address,indexed address,uint256,address,uint256)
+          handler: handleClaimed
+        - event: Deposited(indexed address,indexed address,address,uint256,uint256)
+          handler: handleDeposited
+        - event: Executed(indexed address,address,uint16)
+          handler: handleExecuted
+          receipt: true
+        - event: FundraisingClosed(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleFundraisingClosed
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Withdrawn(indexed address,uint256,indexed
+            address,uint256,(address,uint256,uint256,uint256,uint256)[])
+          handler: handleWithdrawn
+      file: ./src/non-flexible-pot.ts

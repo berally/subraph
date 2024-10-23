@@ -2,9 +2,7 @@
   "name": "berally-pot",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare:sepolia": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "prepare:berachain-testnet": "mustache config/berachain-testnet.json subgraph.template.yaml > subgraph.yaml",
-
     "codegen": "graph codegen",
     "build": "graph build",
 

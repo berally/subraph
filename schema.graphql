@@ -107,6 +107,7 @@ type PotCreated @entity(immutable: true) {
   performanceFeeNumerator: BigInt! # uint256
   performanceFeeDenominator: BigInt! # uint256
   potId: BigInt! # uint256
+  potType: Int! # uint8
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -114,7 +115,8 @@ type PotCreated @entity(immutable: true) {
 
 type PotImplementationChanged @entity(immutable: true) {
   id: Bytes!
-  df: Bytes! # address
+  potType: Int! # uint8
+  implementation: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
