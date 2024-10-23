@@ -106,6 +106,52 @@ dataSources:
           handler: handleExchangeTo
       file: ./src/kodiak-guard.ts
   - kind: ethereum
+    name: MemeSwapGuard
+    network: {{ network }}
+    source:
+      address: "{{ memeSwapGuard }}"
+      abi: MemeSwapGuard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ExchangeFrom
+        - ExchangeTo
+      abis:
+        - name: MemeSwapGuard
+          file: ./abis/MemeSwapGuard.json
+      eventHandlers:
+        - event: ExchangeFrom(address,address,address,uint256,address)
+          handler: handleExchangeFrom
+        - event: ExchangeTo(address,address,address,address,uint256)
+          handler: handleExchangeTo
+      file: ./src/meme-swap-guard.ts
+  - kind: ethereum
+    name: OogaboogaGuard
+    network: {{ network }}
+    source:
+      address: "{{ oogaboogaGuard }}"
+      abi: OogaboogaGuard
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ExchangeFrom
+        - ExchangeTo
+      abis:
+        - name: OogaboogaGuard
+          file: ./abis/OogaboogaGuard.json
+      eventHandlers:
+        - event: ExchangeFrom(address,address,address,uint256,address)
+          handler: handleExchangeFrom
+        - event: ExchangeTo(address,address,address,address,uint256)
+          handler: handleExchangeTo
+      file: ./src/oogabooga-guard.ts
+  - kind: ethereum
     name: ERC20Guard
     network: {{ network }}
     source:

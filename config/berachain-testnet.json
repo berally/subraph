@@ -1,7 +1,9 @@
 {
     "network": "berachain-bartio",
     "address": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4",
-    "startBlock": 0,
-    "erc20Guard": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4",
-    "kodiakGuard": "0x60F2906Ef8292a21fa605E00BF38F6ed070c78A4"
+    "startBlock": 4430918,
+    "erc20Guard": "0x9b66513DF5d7d8418556a66a24C82e7f0D3935A9",
+    "kodiakGuard": "0x96A233A73E642A050e23F3080665FCa5C46F7b44",
+    "memeSwapGuard": "0x3539De8F555dC3A150ae20E5dB4053a0A8017EbD",
+    "oogaboogaGuard": "0x16D90e5F3a4d66Db2F191Ade3aADa912f9b0cc20"
 }
