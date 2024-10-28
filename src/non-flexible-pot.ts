@@ -24,6 +24,7 @@ import {
   Withdrawn,
   WithdrawnAsset
 } from "../generated/schema"
+import { BigInt } from "@graphprotocol/graph-ts"
 
 export function handleApproval(event: ApprovalEvent): void {
   let entity = new Approval(
@@ -160,6 +161,7 @@ export function handleFundraisingClosed(event: FundraisingClosedEvent): void {
   entity.totalSupply = event.params.totalSupply
   entity.totalRaisedInUsd = event.params.totalRaisedInUsd
   entity.fundraisingDeadline = event.params.fundraisingDeadline
+  entity.lockingDeadline = new BigInt(0)
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
