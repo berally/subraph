@@ -378,3 +378,21 @@ type ExecutedLog @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type AssetGuardSet @entity(immutable: true) {
+  id: Bytes!
+  assetType: Int! # uint16
+  guardAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ContractGuardSet @entity(immutable: true) {
+  id: Bytes!
+  externalContract: Bytes! # address
+  guardAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

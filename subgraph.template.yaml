@@ -87,6 +87,32 @@ dataSources:
           handler: handleUsdTokenChanged
       file: ./src/pot-factory.ts
   - kind: ethereum
+    name: Governance
+    network: {{ network }}
+    source:
+      address: "{{ governance }}"
+      abi: Governance
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AssetGuardSet
+        - AssetTypeSet
+        - ContractGuardSet
+        - Initialized
+        - OwnershipTransferred
+      abis:
+        - name: Governance
+          file: ./abis/Governance.json
+      eventHandlers:
+        - event: AssetGuardSet(uint16,address)
+          handler: handleAssetGuardSet
+        - event: ContractGuardSet(address,address)
+          handler: handleContractGuardSet
+      file: ./src/governance.ts
+  - kind: ethereum
     name: KodiakGuard
     network: {{ network }}
     source:
