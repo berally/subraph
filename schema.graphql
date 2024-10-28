@@ -249,6 +249,14 @@ type Canceled @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type Closed @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type Executed @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address

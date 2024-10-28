@@ -233,6 +233,19 @@
         "internalType": "address",
         "name": "pot",
         "type": "address"
+      }
+    ],
+    "name": "Closed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
       },
       {
         "indexed": true,
@@ -621,6 +634,13 @@
   },
   {
     "inputs": [],
+    "name": "close",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "closeFundraising",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -888,6 +908,19 @@
     "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "isClosed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

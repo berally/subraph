@@ -4,6 +4,7 @@ import {
   AssetRemoved as AssetRemovedEvent,
   Claimed as ClaimedEvent,
   Canceled as CanceledEvent,
+  Closed as ClosedEvent,
   Deposited as DepositedEvent,
   Executed as ExecutedEvent,
   FundraisingClosed as FundraisingClosedEvent,
@@ -16,6 +17,7 @@ import {
   AssetRemoved,
   Claimed,
   Canceled,
+  Closed,
   Deposited,
   Executed,
   ExecutedLog,
@@ -94,6 +96,20 @@ export function handleCanceled(event: CanceledEvent): void {
   entity.pot = event.params.pot
   entity.totalSupply = event.params.totalSupply
   entity.totalRaisedInUsd = event.params.totalRaisedInUsd
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleClosed(event: ClosedEvent): void {
+  let entity = new Closed(
+    event.transaction.hash.concatI32(event.logIndex.toI32()),
+  )
+
+  entity.pot = event.params.pot
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

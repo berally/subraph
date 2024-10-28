@@ -175,6 +175,7 @@ templates:
         - AssetAdded
         - AssetRemoved
         - Canceled
+        - Closed
         - Claimed
         - Deposited
         - Executed
@@ -194,6 +195,8 @@ templates:
           handler: handleAssetRemoved
         - event: Canceled(indexed address,uint256,uint256)
           handler: handleCanceled
+        - event: Closed(indexed address)
+          handler: handleClosed
         - event: Claimed(indexed address,indexed address,uint256,address,uint256)
           handler: handleClaimed
         - event: Deposited(indexed address,indexed address,address,uint256,uint256)
