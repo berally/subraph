@@ -1,3 +1,4 @@
+import { IPlatformGuard, IAssetGuard } from '../generated/templates'
 import {
   AssetGuardSet as AssetGuardSetEvent,
   ContractGuardSet as ContractGuardSetEvent
@@ -19,6 +20,8 @@ export function handleAssetGuardSet(event: AssetGuardSetEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  IAssetGuard.create(event.params.guardAddress)
 }
 
 export function handleContractGuardSet(event: ContractGuardSetEvent): void {
@@ -33,4 +36,6 @@ export function handleContractGuardSet(event: ContractGuardSetEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  IPlatformGuard.create(event.params.guardAddress)
 }

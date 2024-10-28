@@ -2,10 +2,5 @@
     "network": "berachain-bartio",
     "address": "0x330A75481C9895C5A82A0C5035eFae00b401B2fc",
     "startBlock": 5937142,
-    "erc20Guard": "0x49740694E889Ed81C7B8f52B62b255c129D6dD1e",
-    "erc20KodiakLPGuard": "0xdC577648cC740b138Bfa6118f8575426C83cC9eC",
-    "kodiakGuard": "0x0A1E2e06AB76795E1FdBbbe17406bfd297Edd833",
-    "kodiakLiquidityGuard": "0x996C42c5f9af9BD18F39Ed96D481B6356D05E691",
-    "memeSwapGuard": "0xf6bB1CA5Ed007DF36C73D4333f33312924F125Dd",
-    "oogaboogaGuard": "0xf19e4668c2479D4F4cFb9a6b994e95ed802Cd466"
+    "governance": "0xBDf55E336Ac7B929B411849F89cFc8116C14d218"
 }

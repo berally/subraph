@@ -1,6 +1,6 @@
 import {
   ERC20Approval as ERC20ApprovalEvent
-} from "../generated/ERC20KodiakLPGuard/ERC20KodiakLPGuard"
+} from "../generated/templates/IAssetGuard/IAssetGuard"
 import { ERC20Approval } from "../generated/schema"
 
 export function handleERC20Approval(event: ERC20ApprovalEvent): void {

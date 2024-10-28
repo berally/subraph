@@ -112,138 +112,6 @@ dataSources:
         - event: ContractGuardSet(address,address)
           handler: handleContractGuardSet
       file: ./src/governance.ts
-  - kind: ethereum
-    name: KodiakGuard
-    network: {{ network }}
-    source:
-      address: "{{ kodiakGuard }}"
-      abi: KodiakGuard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - ExchangeFrom
-        - ExchangeTo
-      abis:
-        - name: KodiakGuard
-          file: ./abis/KodiakGuard.json
-      eventHandlers:
-        - event: ExchangeFrom(address,address,address,uint256,address)
-          handler: handleExchangeFrom
-        - event: ExchangeTo(address,address,address,address,uint256)
-          handler: handleExchangeTo
-      file: ./src/kodiak-guard.ts
-  - kind: ethereum
-    name: KodiakLiquidityGuard
-    network: {{ network }}
-    source:
-      address: "{{ kodiakLiquidityGuard }}"
-      abi: KodiakLiquidityGuard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - AddLiquidity
-        - RemoveLiquidity
-      abis:
-        - name: KodiakLiquidityGuard
-          file: ./abis/KodiakLiquidityGuard.json
-      eventHandlers:
-        - event: AddLiquidity(address,address,address,bytes)
-          handler: handleAddLiquidity
-        - event: RemoveLiquidity(address,address,address,bytes)
-          handler: handleRemoveLiquidity
-      file: ./src/kodiak-liquidity-guard.ts
-  - kind: ethereum
-    name: MemeSwapGuard
-    network: {{ network }}
-    source:
-      address: "{{ memeSwapGuard }}"
-      abi: MemeSwapGuard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - ExchangeFrom
-        - ExchangeTo
-      abis:
-        - name: MemeSwapGuard
-          file: ./abis/MemeSwapGuard.json
-      eventHandlers:
-        - event: ExchangeFrom(address,address,address,uint256,address)
-          handler: handleExchangeFrom
-        - event: ExchangeTo(address,address,address,address,uint256)
-          handler: handleExchangeTo
-      file: ./src/meme-swap-guard.ts
-  - kind: ethereum
-    name: OogaboogaGuard
-    network: {{ network }}
-    source:
-      address: "{{ oogaboogaGuard }}"
-      abi: OogaboogaGuard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - ExchangeFrom
-        - ExchangeTo
-      abis:
-        - name: OogaboogaGuard
-          file: ./abis/OogaboogaGuard.json
-      eventHandlers:
-        - event: ExchangeFrom(address,address,address,uint256,address)
-          handler: handleExchangeFrom
-        - event: ExchangeTo(address,address,address,address,uint256)
-          handler: handleExchangeTo
-      file: ./src/oogabooga-guard.ts
-  - kind: ethereum
-    name: ERC20Guard
-    network: {{ network }}
-    source:
-      address: "{{ erc20Guard }}"
-      abi: ERC20Guard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - ERC20Approval
-      abis:
-        - name: ERC20Guard
-          file: ./abis/ERC20Guard.json
-      eventHandlers:
-        - event: ERC20Approval(address,address,address,uint256)
-          handler: handleERC20Approval
-      file: ./src/erc-20-guard.ts
-  - kind: ethereum
-    name: ERC20KodiakLPGuard
-    network: {{ network }}
-    source:
-      address: "{{ erc20KodiakLPGuard }}"
-      abi: ERC20KodiakLPGuard
-      startBlock: {{ startBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - ERC20Approval
-      abis:
-        - name: ERC20KodiakLPGuard
-          file: ./abis/ERC20KodiakLPGuard.json
-      eventHandlers:
-        - event: ERC20Approval(address,address,address,uint256)
-          handler: handleERC20Approval
-      file: ./src/erc-20-kodiak-lp-guard.ts
 templates:
   - kind: ethereum
     name: FlexiblePot
@@ -341,3 +209,48 @@ templates:
             address,uint256,(address,uint256,uint256,uint256,uint256)[])
           handler: handleWithdrawn
       file: ./src/non-flexible-pot.ts
+  - kind: ethereum
+    name: IPlatformGuard
+    network: {{network}}
+    source:
+      abi: IPlatformGuard
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddLiquidity
+        - RemoveLiquidity
+        - ExchangeFrom
+        - ExchangeTo
+      abis:
+        - name: IPlatformGuard
+          file: ./abis/IPlatformGuard.json
+      eventHandlers:
+        - event: ExchangeFrom(address,address,address,uint256,address)
+          handler: handleExchangeFrom
+        - event: ExchangeTo(address,address,address,address,uint256)
+          handler: handleExchangeTo
+        - event: AddLiquidity(address,address,address,bytes)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(address,address,address,bytes)
+          handler: handleRemoveLiquidity
+      file: ./src/iplatform-guard.ts
+  - kind: ethereum
+    name: IAssetGuard
+    network: {{network}}
+    source:
+      abi: IAssetGuard
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ERC20Approval
+      abis:
+        - name: IAssetGuard
+          file: ./abis/IAssetGuard.json
+      eventHandlers:
+        - event: ERC20Approval(address,address,address,uint256)
+          handler: handleERC20Approval
+      file: ./src/iasset-guard.ts
