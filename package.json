@@ -6,7 +6,8 @@
     "codegen": "graph codegen",
     "build": "graph build",
 
-    "deploy:rewards:testnet": "goldsky subgraph deploy testnet-rewards/1.0.0 --path ."
+    "deploy:rewards:testnet": "goldsky subgraph deploy testnet-rewards/1.0.0 --path .",
+    "deploy:rewards:beta": "goldsky subgraph deploy beta-rewards/1.0.0 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",

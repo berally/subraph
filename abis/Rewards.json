@@ -228,19 +228,6 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "brlyToken",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint16",
@@ -405,6 +392,11 @@
         "type": "uint8"
       },
       {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
@@ -425,7 +417,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_brlyToken",
+        "name": "_rewardToken",
         "type": "address"
       }
     ],
@@ -476,6 +468,19 @@
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardToken",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
