@@ -1125,7 +1125,26 @@
     "inputs": [
       {
         "internalType": "uint8",
-        "name": "",
+        "name": "potType",
+        "type": "uint8"
+      }
+    ],
+    "name": "implementationVersions",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "version",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "potType",
         "type": "uint8"
       }
     ],
@@ -1133,7 +1152,7 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "implementation",
         "type": "address"
       }
     ],
@@ -1417,6 +1436,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "proxyAdmin",
+    "outputs": [
+      {
+        "internalType": "contract ProxyAdmin",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -1632,11 +1664,34 @@
       },
       {
         "internalType": "uint32",
-        "name": "_version",
+        "name": "_implementationVersion",
         "type": "uint32"
       }
     ],
     "name": "setPotImplementation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "potType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint16",
+        "name": "tokenType",
+        "type": "uint16"
+      },
+      {
+        "internalType": "bool",
+        "name": "enable",
+        "type": "bool"
+      }
+    ],
+    "name": "setPotTokenType",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1757,6 +1812,11 @@
         "internalType": "address[]",
         "name": "pots",
         "type": "address[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
     "name": "upgradePots",
@@ -1772,25 +1832,6 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "name": "versions",
-    "outputs": [
-      {
-        "internalType": "uint32",
-        "name": "",
-        "type": "uint32"
       }
     ],
     "stateMutability": "view",
