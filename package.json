@@ -8,7 +8,8 @@
     "deploy:passes:bartio-berally-passes-testnet": "goldsky subgraph deploy bartio-berally-passes-testnet/1.0.0 --path .",
     "deploy:passes:berally-passes-testnet-v2": "goldsky subgraph deploy berally-passes-testnet-v2/2.0.2 --path .",
     "deploy:passes:berally-passes-testnet-performance": "goldsky subgraph deploy berally-passes-testnet-performance/1.0.0 --path .",
-    "deploy:passes:testnet-pol": "goldsky subgraph deploy passes-testnet-pol/1.0.0 --path ."
+    "deploy:passes:testnet-pol": "goldsky subgraph deploy passes-testnet-pol/1.0.0 --path .",
+    "deploy:passes:beta": "goldsky subgraph deploy beta-passes/1.0.0 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",
