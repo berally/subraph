@@ -757,6 +757,11 @@
         "internalType": "bytes",
         "name": "_data",
         "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_nativeTokenAmount",
+        "type": "uint256"
       }
     ],
     "name": "execute",
@@ -781,6 +786,11 @@
         "internalType": "bytes",
         "name": "_data",
         "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_nativeTokenAmount",
+        "type": "uint256"
       }
     ],
     "name": "executeByAdmin",
@@ -1324,5 +1334,9 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   }
 ]

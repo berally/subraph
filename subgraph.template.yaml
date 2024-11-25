@@ -238,6 +238,8 @@ templates:
           handler: handleAddLiquidity
         - event: RemoveLiquidity(address,address,address,bytes)
           handler: handleRemoveLiquidity
+        - event: UnwrapWBERA(address,address,uint256)
+          handler: handleUnwrapWBERA
       file: ./src/iplatform-guard.ts
   - kind: ethereum
     name: IAssetGuard
@@ -250,10 +252,16 @@ templates:
       language: wasm/assemblyscript
       entities:
         - ERC20Approval
+        - WrapNativeToken
+        - UnwrapNativeToken
       abis:
         - name: IAssetGuard
           file: ./abis/IAssetGuard.json
       eventHandlers:
         - event: ERC20Approval(address,address,address,uint256)
           handler: handleERC20Approval
+        - event: WrapNativeToken(address,address,uint256)
+          handler: handleWrapNativeToken
+        - event: UnwrapNativeToken(address,address,uint256)
+          handler: handleUnwrapNativeToken
       file: ./src/iasset-guard.ts

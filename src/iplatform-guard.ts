@@ -2,9 +2,10 @@ import {
     ExchangeFrom as ExchangeFromEvent,
     ExchangeTo as ExchangeToEvent,
     AddLiquidity as AddLiquidityEvent,
-    RemoveLiquidity as RemoveLiquidityEvent
+    RemoveLiquidity as RemoveLiquidityEvent,
+    UnwrapWBERA as UnwrapWBERAEvent
 } from "../generated/templates/IPlatformGuard/IPlatformGuard"
-  import { ExchangeFrom, ExchangeTo, AddLiquidity, RemoveLiquidity } from "../generated/schema"
+  import { ExchangeFrom, ExchangeTo, AddLiquidity, RemoveLiquidity, UnwrapWBERA } from "../generated/schema"
 
  export function handleExchangeFrom(event: ExchangeFromEvent): void {
     let entity = new ExchangeFrom(
@@ -62,6 +63,21 @@ import {
     entity.pot = event.params.pot
     entity.dex = event.params.dex
     entity.asset = event.params.pair
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleUnwrapWBERA(event: UnwrapWBERAEvent): void {
+    let entity = new UnwrapWBERA(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amountMinimum = event.params.amountMinimum
 
     entity.blockNumber = event.block.number
     entity.blockTimestamp = event.block.timestamp

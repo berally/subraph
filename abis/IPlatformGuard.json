@@ -193,6 +193,50 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "dex",
+        "type": "address"
+      }
+    ],
+    "name": "SetDelegateApproval",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "dex",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountMinimum",
+        "type": "uint256"
+      }
+    ],
+    "name": "UnwrapWBERA",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "platformName",
     "outputs": [
@@ -221,6 +265,40 @@
         "internalType": "bytes",
         "name": "data",
         "type": "bytes"
+      }
+    ],
+    "name": "txGuard",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "txType",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "nativeTokenAmount",
+        "type": "uint256"
       }
     ],
     "name": "txGuard",
