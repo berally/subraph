@@ -487,27 +487,30 @@
             "internalType": "uint256",
             "name": "amountOut",
             "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "protocolExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "managerExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "performanceFee",
-            "type": "uint256"
           }
         ],
         "indexed": false,
         "internalType": "struct NonFlexiblePot.WithdrawnAsset[]",
         "name": "withdrawnAssets",
         "type": "tuple[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "protocolExitFee",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "managerExitFee",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "performanceFee",
+        "type": "uint256"
       }
     ],
     "name": "Withdrawn",
@@ -1124,26 +1127,26 @@
             "internalType": "uint256",
             "name": "amountOut",
             "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "protocolExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "managerExitFee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "performanceFee",
-            "type": "uint256"
           }
         ],
         "internalType": "struct NonFlexiblePot.WithdrawnAsset[]",
         "name": "",
         "type": "tuple[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "protocolExitFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "managerExitFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "performanceFee",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

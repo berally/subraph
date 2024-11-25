@@ -209,6 +209,9 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   entity.sharePrice = event.params.sharePrice
   entity.investor = event.params.investor
   entity.shareAmount = event.params.shareAmount
+  entity.protocolExitFee = event.params.protocolExitFee
+  entity.managerExitFee = event.params.managerExitFee
+  entity.performanceFee = event.params.performanceFee
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -223,9 +226,6 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
     withdrawnAsset.withdrawn = withdrawnId;
     withdrawnAsset.asset = withdrawnAssetEvent.asset;
     withdrawnAsset.amountOut = withdrawnAssetEvent.amountOut;
-    withdrawnAsset.protocolExitFee = withdrawnAssetEvent.protocolExitFee;
-    withdrawnAsset.managerExitFee = withdrawnAssetEvent.managerExitFee;
-    withdrawnAsset.performanceFee = withdrawnAssetEvent.performanceFee;
 
     withdrawnAsset.blockNumber = event.block.number
     withdrawnAsset.blockTimestamp = event.block.timestamp

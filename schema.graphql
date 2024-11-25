@@ -302,7 +302,10 @@ type Withdrawn @entity(immutable: true) {
   pot: Bytes! # address
   sharePrice: BigInt! # uint256
   investor: Bytes! # address
-  shareAmount: BigInt! # uint256
+  shareAmount: BigInt! # uint256,
+  protocolExitFee: BigInt! # uint256
+  managerExitFee: BigInt! # uint256
+  performanceFee: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -313,9 +316,6 @@ type WithdrawnAsset @entity(immutable: true) {
   withdrawn: Bytes!
   asset: Bytes! # address
   amountOut: BigInt! # uint256
-  protocolExitFee: BigInt! # uint256
-  managerExitFee: BigInt! # uint256
-  performanceFee: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

@@ -158,7 +158,7 @@ templates:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
         - event: Withdrawn(indexed address,uint256,indexed
-            address,uint256,(address,uint256,uint256,uint256,uint256)[])
+            address,uint256,(address,uint256)[],uint256,uint256,uint256)
           handler: handleWithdrawn
       file: ./src/flexible-pot.ts
   - kind: ethereum
@@ -209,7 +209,7 @@ templates:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
         - event: Withdrawn(indexed address,uint256,indexed
-            address,uint256,(address,uint256,uint256,uint256,uint256)[])
+            address,uint256,(address,uint256)[],uint256,uint256,uint256)
           handler: handleWithdrawn
       file: ./src/non-flexible-pot.ts
   - kind: ethereum
