@@ -3,9 +3,25 @@ import {
     ExchangeTo as ExchangeToEvent,
     AddLiquidity as AddLiquidityEvent,
     RemoveLiquidity as RemoveLiquidityEvent,
-    UnwrapWBERA as UnwrapWBERAEvent
+    UnwrapWBERA as UnwrapWBERAEvent,
+    BerpCancelOpenLimitOrder as BerpCancelOpenLimitOrderEvent,
+    BerpCloseTradeMarket as BerpCloseTradeMarketEvent,
+    BerpExecuteLimitOrder as BerpExecuteLimitOrderEvent,
+    BerpOpenTrade as BerpOpenTradeEvent,
+    BerpUpdateOpenLimitOrder as BerpUpdateOpenLimitOrderEvent,
+    BerpUpdateStopLoss as BerpUpdateStopLossEvent,
+    BerpUpdateTakeProfit as BerpUpdateTakeProfitEvent,
 } from "../generated/templates/IPlatformGuard/IPlatformGuard"
-  import { ExchangeFrom, ExchangeTo, AddLiquidity, RemoveLiquidity, UnwrapWBERA } from "../generated/schema"
+  import {
+    ExchangeFrom, ExchangeTo, AddLiquidity, RemoveLiquidity, UnwrapWBERA,
+    BerpCancelOpenLimitOrder,
+    BerpCloseTradeMarket,
+    BerpExecuteLimitOrder,
+    BerpOpenTrade,
+    BerpUpdateOpenLimitOrder,
+    BerpUpdateStopLoss,
+    BerpUpdateTakeProfit,
+  } from "../generated/schema"
 
  export function handleExchangeFrom(event: ExchangeFromEvent): void {
     let entity = new ExchangeFrom(
@@ -78,6 +94,127 @@ import {
     entity.pot = event.params.pot
     entity.dex = event.params.dex
     entity.amountMinimum = event.params.amountMinimum
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpCancelOpenLimitOrder(
+    event: BerpCancelOpenLimitOrderEvent
+  ): void {
+    let entity = new BerpCancelOpenLimitOrder(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpCloseTradeMarket(
+    event: BerpCloseTradeMarketEvent
+  ): void {
+    let entity = new BerpCloseTradeMarket(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpExecuteLimitOrder(
+    event: BerpExecuteLimitOrderEvent
+  ): void {
+    let entity = new BerpExecuteLimitOrder(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpOpenTrade(event: BerpOpenTradeEvent): void {
+    let entity = new BerpOpenTrade(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.pairIndex = event.params.pairIndex
+    entity.orderType = event.params.orderType
+    entity.index = event.params.index
+    entity.buy = event.params.buy
+    entity.leverage = event.params.leverage
+    entity.initialPosToken = event.params.initialPosToken
+    entity.positionSizeHoney = event.params.positionSizeHoney
+    entity.openPrice = event.params.openPrice
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpUpdateOpenLimitOrder(
+    event: BerpUpdateOpenLimitOrderEvent
+  ): void {
+    let entity = new BerpUpdateOpenLimitOrder(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+    entity.newPrice = event.params.newPrice
+    entity.takeProfit = event.params.takeProfit
+    entity.stopLoss = event.params.stopLoss
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpUpdateStopLoss(event: BerpUpdateStopLossEvent): void {
+    let entity = new BerpUpdateStopLoss(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+    entity.stopLoss = event.params.stopLoss
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBerpUpdateTakeProfit(
+    event: BerpUpdateTakeProfitEvent
+  ): void {
+    let entity = new BerpUpdateTakeProfit(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.index = event.params.index
+    entity.takeProfit = event.params.takeProfit
 
     entity.blockNumber = event.block.number
     entity.blockTimestamp = event.block.timestamp

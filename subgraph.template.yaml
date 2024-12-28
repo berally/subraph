@@ -232,6 +232,13 @@ templates:
         - RemoveLiquidity
         - ExchangeFrom
         - ExchangeTo
+        - BerpOpenTrade
+        - BerpCloseTradeMarket
+        - BerpCancelOpenLimitOrder
+        - BerpUpdateOpenLimitOrder
+        - BerpExecuteLimitOrder
+        - BerpUpdateTakeProfit
+        - BerpUpdateStopLoss
       abis:
         - name: IPlatformGuard
           file: ./abis/IPlatformGuard.json
@@ -246,6 +253,20 @@ templates:
           handler: handleRemoveLiquidity
         - event: UnwrapWBERA(address,address,uint256)
           handler: handleUnwrapWBERA
+        - event: BerpCancelOpenLimitOrder(address,uint256)
+          handler: handleBerpCancelOpenLimitOrder
+        - event: BerpCloseTradeMarket(address,uint256)
+          handler: handleBerpCloseTradeMarket
+        - event: BerpExecuteLimitOrder(address,uint256)
+          handler: handleBerpExecuteLimitOrder
+        - event: BerpOpenTrade(address,address,uint256,uint8,uint256,bool,uint256,uint256,uint256,int64)
+          handler: handleBerpOpenTrade
+        - event: BerpUpdateOpenLimitOrder(address,uint256,int64,int64,int64)
+          handler: handleBerpUpdateOpenLimitOrder
+        - event: BerpUpdateStopLoss(address,uint256,int64)
+          handler: handleBerpUpdateStopLoss
+        - event: BerpUpdateTakeProfit(address,uint256,int64)
+          handler: handleBerpUpdateTakeProfit
       file: ./src/iplatform-guard.ts
   - kind: ethereum
     name: IAssetGuard

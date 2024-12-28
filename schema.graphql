@@ -455,3 +455,79 @@ type PotUpgraded @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type BerpOpenTrade @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  pairIndex: BigInt! # uint256
+  index: BigInt! # uint256
+  orderType: Int! # uint8
+  buy: Boolean! # bool
+  leverage: BigInt! # uint256
+  initialPosToken: BigInt! # uint256
+  positionSizeHoney: BigInt! # uint256
+  openPrice: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpCloseTradeMarket @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpCancelOpenLimitOrder @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpUpdateOpenLimitOrder @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  newPrice: BigInt! # uint256
+  takeProfit: BigInt! # uint256
+  stopLoss: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpExecuteLimitOrder @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpUpdateTakeProfit @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  takeProfit: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BerpUpdateStopLoss @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  index: BigInt! # uint256
+  stopLoss: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
