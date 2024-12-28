@@ -188,6 +188,12 @@
         "internalType": "uint8",
         "name": "potType",
         "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "version",
+        "type": "uint32"
       }
     ],
     "name": "FlexiblePotCreated",
@@ -346,6 +352,12 @@
         "internalType": "uint8",
         "name": "potType",
         "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "version",
+        "type": "uint32"
       }
     ],
     "name": "NonFlexiblePotCreated",
@@ -414,6 +426,31 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeNumerator",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeDenominator",
+        "type": "uint256"
+      }
+    ],
+    "name": "PlatformFeeSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint8",
         "name": "potType",
         "type": "uint8"
@@ -432,6 +469,25 @@
       }
     ],
     "name": "PotImplementationChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "version",
+        "type": "uint32"
+      }
+    ],
+    "name": "PotUpgraded",
     "type": "event"
   },
   {
@@ -1037,6 +1093,30 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
+      }
+    ],
+    "name": "getPlatformFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "pot",
         "type": "address"
@@ -1357,6 +1437,25 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
+      }
+    ],
+    "name": "platformFees",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
@@ -1653,6 +1752,24 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "platform",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPlatformFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint8",
         "name": "_potType",
         "type": "uint8"
@@ -1809,9 +1926,32 @@
   {
     "inputs": [
       {
-        "internalType": "address[]",
-        "name": "pots",
-        "type": "address[]"
+        "internalType": "address",
+        "name": "pot",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "upgradePot",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "startIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "endIndex",
+        "type": "uint256"
       },
       {
         "internalType": "bytes",

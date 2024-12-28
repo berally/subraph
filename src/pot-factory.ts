@@ -20,7 +20,8 @@ import {
   TokenRemoved as TokenRemovedEvent,
   TreasuryChanged as TreasuryChangedEvent,
   Unpaused as UnpausedEvent,
-  UsdTokenChanged as UsdTokenChangedEvent
+  UsdTokenChanged as UsdTokenChangedEvent,
+  PotUpgraded as PotUpgradedEvent
 } from "../generated/PotFactory/PotFactory"
 import {
   AdminChanged,
@@ -43,7 +44,8 @@ import {
   TokenRemoved,
   TreasuryChanged,
   Unpaused,
-  UsdTokenChanged
+  UsdTokenChanged,
+  PotUpgraded
 } from "../generated/schema"
 
 export function handleAdminChanged(event: AdminChangedEvent): void {
@@ -235,6 +237,7 @@ export function handleFlexiblePotCreated(event: FlexiblePotCreatedEvent): void {
   entity.performanceFeeNumerator = event.params.performanceFeeNumerator
   entity.performanceFeeDenominator = event.params.performanceFeeDenominator
   entity.potId = event.params.id
+  entity.version = event.params.version
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -257,6 +260,7 @@ export function handleNonFlexiblePotCreated(event: NonFlexiblePotCreatedEvent): 
   entity.performanceFeeNumerator = event.params.performanceFeeNumerator
   entity.performanceFeeDenominator = event.params.performanceFeeDenominator
   entity.potId = event.params.id
+  entity.version = event.params.version
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -359,6 +363,20 @@ export function handleUsdTokenChanged(event: UsdTokenChangedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.usd = event.params.usd
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handlePotUpgraded(event: PotUpgradedEvent): void {
+  let entity = new PotUpgraded(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.pot = event.params.pot
+  entity.version = event.params.version
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

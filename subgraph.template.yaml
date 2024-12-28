@@ -66,10 +66,10 @@ dataSources:
         - event: Paused(address)
           handler: handlePaused
         - event: FlexiblePotCreated(indexed address,indexed address,uint256,uint256,uint256,indexed
-            address,uint256,uint256,uint256,uint8)
+            address,uint256,uint256,uint256,uint8,uint32)
           handler: handleFlexiblePotCreated
         - event: NonFlexiblePotCreated(indexed address,indexed address,uint256,uint256,indexed
-            address,uint256,uint256,uint256,uint8)
+            address,uint256,uint256,uint256,uint8,uint32)
           handler: handleNonFlexiblePotCreated
         - event: PotImplementationChanged(uint8,indexed address,uint32)
           handler: handlePotImplementationChanged
@@ -85,6 +85,8 @@ dataSources:
           handler: handleUnpaused
         - event: UsdTokenChanged(indexed address)
           handler: handleUsdTokenChanged
+        - event: PotUpgraded(address,uint32)
+          handler: handlePotUpgraded
       file: ./src/pot-factory.ts
   - kind: ethereum
     name: Governance
@@ -160,6 +162,8 @@ templates:
         - event: Withdrawn(indexed address,uint256,indexed
             address,uint256,(address,uint256)[],uint256,uint256,uint256)
           handler: handleWithdrawn
+        - event: PlatformFeeCollected(indexed address,address,uint256)
+          handler: handlePlatformFeeCollected
       file: ./src/flexible-pot.ts
   - kind: ethereum
     name: NonFlexiblePot
@@ -211,6 +215,8 @@ templates:
         - event: Withdrawn(indexed address,uint256,indexed
             address,uint256,(address,uint256)[],uint256,uint256,uint256)
           handler: handleWithdrawn
+        - event: PlatformFeeCollected(indexed address,address,uint256)
+          handler: handlePlatformFeeCollected
       file: ./src/non-flexible-pot.ts
   - kind: ethereum
     name: IPlatformGuard

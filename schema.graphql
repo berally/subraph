@@ -107,6 +107,7 @@ type FlexiblePotCreated @entity(immutable: true) {
   performanceFeeNumerator: BigInt! # uint256
   performanceFeeDenominator: BigInt! # uint256
   potId: BigInt! # uint256
+  version: BigInt! # uint32
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -122,6 +123,7 @@ type NonFlexiblePotCreated @entity(immutable: true) {
   performanceFeeNumerator: BigInt! # uint256
   performanceFeeDenominator: BigInt! # uint256
   potId: BigInt! # uint256
+  version: BigInt! # uint32
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -321,6 +323,16 @@ type WithdrawnAsset @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type PlatformFeeCollected @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  asset: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type AddLiquidity @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
@@ -430,6 +442,15 @@ type ContractGuardSet @entity(immutable: true) {
   id: Bytes!
   externalContract: Bytes! # address
   guardAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PotUpgraded @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  version: BigInt! # uint32
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

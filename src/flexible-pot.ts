@@ -9,6 +9,7 @@ import {
   FundraisingClosed as FundraisingClosedEvent,
   Transfer as TransferEvent,
   Withdrawn as WithdrawnEvent,
+  PlatformFeeCollected as PlatformFeeCollectedEvent
 } from "../generated/templates/FlexiblePot/FlexiblePot"
 import {
   Approval,
@@ -22,7 +23,8 @@ import {
   FundraisingClosed,
   Transfer,
   Withdrawn,
-  WithdrawnAsset
+  WithdrawnAsset,
+  PlatformFeeCollected
 } from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
@@ -216,4 +218,19 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
 
     withdrawnAsset.save();
   }
+}
+
+export function handlePlatformFeeCollected(event: PlatformFeeCollectedEvent): void {
+  const Id = event.transaction.hash.concatI32(event.logIndex.toI32()).concat(event.address)
+
+  let entity = new PlatformFeeCollected(Id)
+  entity.pot = event.params.pot
+  entity.asset = event.params.asset
+  entity.amount = event.params.amount
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
 }
