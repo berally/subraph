@@ -9,7 +9,7 @@
     "deploy:berachain-testnet-performance": "goldsky subgraph deploy berally-pot-testnet-performance/1.0.0 --path .",
     "deploy:berachain-testnet": "goldsky subgraph deploy berally-pot-testnet/5.0.2 --path .",
     "deploy:pot:beta": "goldsky subgraph deploy beta-pot/1.0.0 --path .",
-    "deploy:testnet:6": "goldsky subgraph deploy berally-pot-testnet/6.0.6 --path ."
+    "deploy:testnet:6": "goldsky subgraph deploy berally-pot-testnet/6.0.7 --path ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.70.0",

@@ -267,6 +267,20 @@ templates:
           handler: handleBerpUpdateStopLoss
         - event: BerpUpdateTakeProfit(address,uint256,int64)
           handler: handleBerpUpdateTakeProfit
+        - event: BeradromeBorrow(address,address,uint256)
+          handler: handleBeradromeBorrow
+        - event: BeradromeEarnDeposit(address,address,uint256)
+          handler: handleBeradromeEarnDeposit
+        - event: BeradromeEarnWithdraw(address,address,uint256)
+          handler: handleBeradromeEarnWithdraw
+        - event: BeradromeExercise(address,address,uint256)
+          handler: handleBeradromeExercise
+        - event: BeradromeGetReward(address,address)
+          handler: handleBeradromeGetReward
+        - event: BeradromeRedeem(address,address,uint256)
+          handler: handleBeradromeRedeem
+        - event: BeradromeRepay(address,address,uint256)
+          handler: handleBeradromeRepay
       file: ./src/iplatform-guard.ts
   - kind: ethereum
     name: IAssetGuard

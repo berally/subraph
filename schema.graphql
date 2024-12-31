@@ -531,3 +531,72 @@ type BerpUpdateStopLoss @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type BeradromeBorrow @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeEarnDeposit @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeEarnWithdraw @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeExercise @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeGetReward @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeRedeem @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeradromeRepay @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

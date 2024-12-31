@@ -11,6 +11,13 @@ import {
     BerpUpdateOpenLimitOrder as BerpUpdateOpenLimitOrderEvent,
     BerpUpdateStopLoss as BerpUpdateStopLossEvent,
     BerpUpdateTakeProfit as BerpUpdateTakeProfitEvent,
+    BeradromeBorrow as BeradromeBorrowEvent,
+    BeradromeEarnDeposit as BeradromeEarnDepositEvent,
+    BeradromeEarnWithdraw as BeradromeEarnWithdrawEvent,
+    BeradromeExercise as BeradromeExerciseEvent,
+    BeradromeGetReward as BeradromeGetRewardEvent,
+    BeradromeRedeem as BeradromeRedeemEvent,
+    BeradromeRepay as BeradromeRepayEvent,
 } from "../generated/templates/IPlatformGuard/IPlatformGuard"
   import {
     ExchangeFrom, ExchangeTo, AddLiquidity, RemoveLiquidity, UnwrapWBERA,
@@ -21,6 +28,13 @@ import {
     BerpUpdateOpenLimitOrder,
     BerpUpdateStopLoss,
     BerpUpdateTakeProfit,
+    BeradromeBorrow,
+    BeradromeEarnDeposit,
+    BeradromeEarnWithdraw,
+    BeradromeExercise,
+    BeradromeGetReward,
+    BeradromeRedeem,
+    BeradromeRepay
   } from "../generated/schema"
 
  export function handleExchangeFrom(event: ExchangeFromEvent): void {
@@ -215,6 +229,114 @@ import {
     entity.pot = event.params.pot
     entity.index = event.params.index
     entity.takeProfit = event.params.takeProfit
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeBorrow(event: BeradromeBorrowEvent): void {
+    let entity = new BeradromeBorrow(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeEarnDeposit(
+    event: BeradromeEarnDepositEvent
+  ): void {
+    let entity = new BeradromeEarnDeposit(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeEarnWithdraw(
+    event: BeradromeEarnWithdrawEvent
+  ): void {
+    let entity = new BeradromeEarnWithdraw(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeExercise(event: BeradromeExerciseEvent): void {
+    let entity = new BeradromeExercise(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeGetReward(event: BeradromeGetRewardEvent): void {
+    let entity = new BeradromeGetReward(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeRedeem(event: BeradromeRedeemEvent): void {
+    let entity = new BeradromeRedeem(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeRepay(event: BeradromeRepayEvent): void {
+    let entity = new BeradromeRepay(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.loanId = event.params.loanId
 
     entity.blockNumber = event.block.number
     entity.blockTimestamp = event.block.timestamp
