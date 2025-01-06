@@ -14,6 +14,7 @@ import {
     BeradromeBorrow as BeradromeBorrowEvent,
     BeradromeEarnDeposit as BeradromeEarnDepositEvent,
     BeradromeEarnWithdraw as BeradromeEarnWithdrawEvent,
+    BeradromeEarnBurnFor as BeradromeEarnBurnForEvent,
     BeradromeExercise as BeradromeExerciseEvent,
     BeradromeGetReward as BeradromeGetRewardEvent,
     BeradromeRedeem as BeradromeRedeemEvent,
@@ -31,6 +32,7 @@ import {
     BeradromeBorrow,
     BeradromeEarnDeposit,
     BeradromeEarnWithdraw,
+    BeradromeEarnBurnFor,
     BeradromeExercise,
     BeradromeGetReward,
     BeradromeRedeem,
@@ -273,6 +275,23 @@ import {
     event: BeradromeEarnWithdrawEvent
   ): void {
     let entity = new BeradromeEarnWithdraw(
+      event.transaction.hash.concatI32(event.logIndex.toI32())
+    )
+    entity.pot = event.params.pot
+    entity.dex = event.params.dex
+    entity.amount = event.params.amount
+
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
+
+    entity.save()
+  }
+
+  export function handleBeradromeEarnBurnFor(
+    event: BeradromeEarnBurnForEvent
+  ): void {
+    let entity = new BeradromeEarnBurnFor(
       event.transaction.hash.concatI32(event.logIndex.toI32())
     )
     entity.pot = event.params.pot

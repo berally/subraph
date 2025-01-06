@@ -273,6 +273,8 @@ templates:
           handler: handleBeradromeEarnDeposit
         - event: BeradromeEarnWithdraw(address,address,uint256)
           handler: handleBeradromeEarnWithdraw
+        - event: BeradromeEarnBurnFor(address,address,uint256)
+          handler: handleBeradromeEarnBurnFor
         - event: BeradromeExercise(address,address,uint256)
           handler: handleBeradromeExercise
         - event: BeradromeGetReward(address,address)

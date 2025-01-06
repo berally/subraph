@@ -562,6 +562,16 @@ type BeradromeEarnWithdraw @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type BeradromeEarnBurnFor @entity(immutable: true) {
+  id: Bytes!
+  pot: Bytes! # address
+  dex: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type BeradromeExercise @entity(immutable: true) {
   id: Bytes!
   pot: Bytes! # address
