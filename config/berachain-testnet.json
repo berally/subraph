@@ -1,6 +1,5 @@
 {
     "network": "berachain-bartio",
-    "address": "0x7B749eef7b99856597Aa1C0c91BE0f17448084cb",
-    "startBlock": 6429454,
-    "governance": "0x69d23DE9E9d0A40f181712b0DE0822BAA46f6Ed1"
+    "address": "",
+    "startBlock": 0
 }
