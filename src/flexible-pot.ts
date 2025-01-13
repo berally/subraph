@@ -24,7 +24,8 @@ import {
   Transfer,
   Withdrawn,
   WithdrawnAsset,
-  PlatformFeeCollected
+  PlatformFeeCollected,
+  Participant
 } from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
@@ -175,6 +176,7 @@ export function handleTransfer(event: TransferEvent): void {
   let entity = new Transfer(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
+
   entity.from = event.params.from
   entity.to = event.params.to
   entity.value = event.params.value
@@ -184,6 +186,31 @@ export function handleTransfer(event: TransferEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  if(event.params.from.toHexString() != '0x0000000000000000000000000000000000000000') {
+    let participantId = event.address.toHexString() +  event.params.from.toHexString()
+    let participant = Participant.load(participantId)
+    if(participant) {
+      participant.balance = participant.balance.minus(event.params.value)
+      participant.save()
+    }
+  }
+
+  if(event.params.to.toHexString() != '0x0000000000000000000000000000000000000000') {
+    let participantId = event.address.toHexString() +  event.params.to.toHexString()
+    let participant = Participant.load(participantId)
+    if(participant === null) {
+      participant = new Participant(participantId)
+      participant.pot = event.address
+      participant.investor = event.params.to
+      participant.balance = event.params.value
+    }
+    else {
+      participant.balance = participant.balance.plus(event.params.value)
+    }
+
+    participant.save()
+  }
 }
 
 export function handleWithdrawn(event: WithdrawnEvent): void {

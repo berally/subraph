@@ -610,3 +610,10 @@ type BeradromeRepay @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Participant @entity(immutable: false) {
+  id: ID!
+  pot: Bytes! # address
+  investor: Bytes! # address
+  balance: BigInt! # uint256
+}
