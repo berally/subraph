@@ -26,6 +26,7 @@ export function handleStaked(event: StakedEvent): void {
   if (staker == null) {
     staker = new Staker(event.params.staker.toHexString())
     staker.amount = event.params.amount
+    staker.address = event.params.staker
   }
   else {
     staker.amount = staker.amount.plus(event.params.amount)
@@ -51,6 +52,7 @@ export function handleWithdrawn(event: WithdrawnEvent): void {
   if (staker == null) {
     staker = new Staker(event.params.staker.toHexString())
     staker.amount = new BigInt(0)
+    staker.address = event.params.staker
   }
   else {
     if(staker.amount.lt(event.params.amount)){

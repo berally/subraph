@@ -18,5 +18,6 @@ type Withdrawn @entity(immutable: true) {
 
 type Staker @entity(immutable: false) {
   id: ID!
+  address: Bytes! # address
   amount: BigInt! # uint256
 }
