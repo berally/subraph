@@ -1,12 +1,14 @@
 import {
   Created as CreatedEvent,
   Updated as UpdatedEvent,
-  Claimed as ClaimedEvent
+  Claimed as ClaimedEvent,
+  RewardsDistributed as RewardsDistributedEvent
 } from "../generated/Rewards/Rewards"
 import {
   Created,
   Updated,
-  Claimed
+  Claimed,
+  RewardsDistributed
 } from "../generated/schema"
 
 export function handleCreated(event: CreatedEvent): void {
@@ -16,7 +18,6 @@ export function handleCreated(event: CreatedEvent): void {
   entity.year = event.params.year
   entity.month = event.params.month
   entity.releaseAt = event.params.releaseAt
-  entity.rewards = event.params.rewards
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -32,7 +33,21 @@ export function handleUpdated(event: UpdatedEvent): void {
   entity.year = event.params.year
   entity.month = event.params.month
   entity.releaseAt = event.params.releaseAt
-  entity.rewards = event.params.rewards
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleRewardsDistributed(event: RewardsDistributedEvent): void {
+  let entity = new RewardsDistributed(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.year = event.params.year
+  entity.month = event.params.month
+  entity.amount = event.params.amount
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -48,6 +63,7 @@ export function handleClaimed(event: ClaimedEvent): void {
   entity.year = event.params.year
   entity.month = event.params.month
   entity.user = event.params.user
+  entity.percent = event.params.percent
   entity.amount = event.params.amount
 
   entity.blockNumber = event.block.number

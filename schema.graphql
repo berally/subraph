@@ -3,7 +3,6 @@ type Created @entity(immutable: true) {
   year: Int,
   month: Int,
   releaseAt: BigInt! # uint256
-  rewards: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -14,7 +13,16 @@ type Updated @entity(immutable: true) {
   year: Int,
   month: Int,
   releaseAt: BigInt! # uint256
-  rewards: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RewardsDistributed @entity(immutable: true) {
+  id: Bytes!
+  year: Int,
+  month: Int,
+  amount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -25,6 +33,7 @@ type Claimed @entity(immutable: true) {
   year: Int,
   month: Int,
   user: Bytes! # address
+  percent: BigInt! # uint256
   amount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!

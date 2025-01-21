@@ -16,23 +16,20 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Initialized
-        - ManagerFeePercentageChanged
-        - ReferralFeePercentageChanged
-        - OwnershipTransferred
-        - ProtocolFeePercentageChanged
-        - TransferFeeChanged
-        - Trade
-        - Approval
-        - Transfer
+        - Created
+        - Updated
+        - Claimed
+        - RewardsDistributed
       abis:
         - name: Rewards
           file: ./abis/Rewards.json
       eventHandlers:
-        - event: Created(uint16,uint8,uint256,uint256)
+        - event: Created(uint16,uint8,uint256)
           handler: handleCreated
-        - event: Updated(uint16,uint8,uint256,uint256)
+        - event: Updated(uint16,uint8,uint256)
           handler: handleUpdated
-        - event: Claimed(uint16,uint8,address,uint256)
+        - event: Claimed(uint16,uint8,address,uint256,uint256)
           handler: handleClaimed
+        - event: RewardsDistributed(uint16,uint8,uint256)
+          handler: handleRewardsDistributed
       file: ./src/rewards.ts

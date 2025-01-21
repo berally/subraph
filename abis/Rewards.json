@@ -120,6 +120,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "percent",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
       }
@@ -146,12 +152,6 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "releaseAt",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "rewards",
         "type": "uint256"
       }
     ],
@@ -214,18 +214,50 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "releaseAt",
+        "name": "amount",
         "type": "uint256"
+      }
+    ],
+    "name": "RewardsDistributed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "year",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "month",
+        "type": "uint8"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "rewards",
+        "name": "releaseAt",
         "type": "uint256"
       }
     ],
     "name": "Updated",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DENOMINATOR",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -241,7 +273,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "percent",
         "type": "uint256"
       },
       {
@@ -300,11 +332,6 @@
         "internalType": "uint256",
         "name": "releaseAt",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "rewards",
-        "type": "uint256"
       }
     ],
     "name": "createCycle",
@@ -329,11 +356,34 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "rewards",
+        "name": "amount",
         "type": "uint256"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "year",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint8",
+        "name": "month",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "distributeRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -398,7 +448,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "percent",
         "type": "uint256"
       }
     ],
@@ -472,6 +522,19 @@
   },
   {
     "inputs": [],
+    "name": "rewardDistributor",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "rewardToken",
     "outputs": [
       {
@@ -492,6 +555,19 @@
       }
     ],
     "name": "setBEWallet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_rewardDistributor",
+        "type": "address"
+      }
+    ],
+    "name": "setRewardDistributor",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -524,11 +600,6 @@
       {
         "internalType": "uint256",
         "name": "releaseAt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "rewards",
         "type": "uint256"
       }
     ],
