@@ -42,3 +42,23 @@ dataSources:
         - event: Trade(address,address,bool,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)
           handler: handleTrade
       file: ./src/passes.ts
+  - kind: ethereum
+    name: Referral
+    network: {{ network }}
+    source:
+      address: "{{ referralAddress }}"
+      abi: Referral
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Registered
+      abis:
+        - name: Referral
+          file: ./abis/Referral.json
+      eventHandlers:
+        - event: Registered(indexed address,indexed address)
+          handler: handleRegistered
+      file: ./src/referral.ts

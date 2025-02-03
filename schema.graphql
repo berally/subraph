@@ -56,3 +56,12 @@ type Trade @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Registered @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  referrer: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
